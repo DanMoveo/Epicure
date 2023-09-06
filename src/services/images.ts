@@ -9,4 +9,5 @@ import table from "../images/AppHeader/table.png";
 import x from "../images/AppHeader/x.png";
 import big_bag from "../images/AppHeader/big_bag.png";
 
+
 export { Stripes, search, user, bag, forkKnifeIcon, table, x, big_bag };
