@@ -1,10 +1,9 @@
 import "./App.css";
-import HomePage from "./Pages/HomePage";
+import AllResturantsPage from "./Pages/AllResturantsPage/AllResturantsPage";
+// import HomePage from "./Pages/HomePage/HomePage";
 
 function App() {
-  return (
-    <HomePage></HomePage>
-  );
+  return <AllResturantsPage />;
 }
 
 export default App;

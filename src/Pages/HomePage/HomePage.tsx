@@ -1,18 +1,18 @@
 // HomePage.tsx
 
 import React from "react";
-import AppHeader from "../Components/AppHeader/AppHeader";
-import TableImage from "../Components/TableImage/TableImage";
-import Carousel from "../Components/Carousel/Carousel";
+import AppHeader from "../../Components/AppHeader/AppHeader";
+import TableImage from "../../Components/TableImage/TableImage";
+import Carousel from "../../Components/Carousel/Carousel";
 import "./HomePage.scss";
-import resturant from "../images/ResturantImages/claro.png";
-import vegan from "../images/Icons/vegan.png";
-import spicy from "../images/Icons/spicy.png";
-import vegetarian from "../images/Icons/vegetarian.png";
-import OurIcons from "../Components/OurIcons/OurIcons";
-import ChefOfTheWeek from "../Components/ChefOfTheWeek/ChefOfTheWeek";
-import AboutUs from "../Components/AboutUs/AboutUs";
-import AppFooter from "../Components/AppFooter/AppFooter";
+import resturant from "../../images/ResturantImages/claro.png";
+import vegan from "../../images/OurIcons/vegan.png";
+import spicy from "../../images/OurIcons/spicy.png";
+import vegetarian from "../../images/OurIcons/vegetarian.png";
+import OurIcons from "../../Components/OurIcons/OurIcons";
+import ChefOfTheWeek from "../../Components/ChefOfTheWeek/ChefOfTheWeek";
+import AboutUs from "../../Components/AboutUs/AboutUs";
+import AppFooter from "../../Components/AppFooter/AppFooter";
 
 const popularRestaurantSlides = [
   {
@@ -23,8 +23,8 @@ const popularRestaurantSlides = [
   },
   {
     id: 2,
-    title: "City Skyline",
-    descriptionORchef: "Ran Shamir",
+    title: "Lumia",
+    descriptionORchef: "Meir Adonie",
     dishImage: resturant,
   },
   {
@@ -38,7 +38,7 @@ const popularRestaurantSlides = [
 const signatureDish = [
   {
     id: 1,
-    title: "Claro",
+    title: "Pad Ki Mao",
     descriptionORchef:
       "Shrimps, Glass Noodles, Kemiri Nuts, Shallots, Lemon Grass, Magic Chili Brown Coconut",
     dishImage: resturant,
@@ -47,11 +47,11 @@ const signatureDish = [
   },
   {
     id: 2,
-    title: "City Skyline",
+    title: "Garbar",
     descriptionORchef:
       "Shrimps, Glass Noodles, Kemiri Nuts, Shallots, Lemon Grass, Magic Chili Brown Coconut",
     dishImage: resturant,
-    price: "88",
+    price: "78",
     additionalImage: [vegetarian],
   },
   {
@@ -68,12 +68,12 @@ const signatureDish = [
 const yossiRestaurantSlides = [
   {
     id: 1,
-    title: "Claro",
+    title: "Onza",
     dishImage: resturant,
   },
   {
     id: 2,
-    title: "City Skyline",
+    title: "Kitchen",
     dishImage: resturant,
   },
   {

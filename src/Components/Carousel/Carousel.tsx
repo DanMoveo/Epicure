@@ -32,16 +32,16 @@ const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
                   <h2 className="title">{slide.title}</h2>
                   <p className="description">{slide.descriptionORchef}</p>
                   {slide.additionalImage && (
-  <div className="additional-images">
-    {slide.additionalImage.map((imageUrl, index) => (
-      <img
-        key={index}
-        src={imageUrl}
-        alt={`Additional ${index + 1}`}
-      />
-    ))}
-  </div>
-)}
+                    <div className="additional-images">
+                      {slide.additionalImage.map((imageUrl, index) => (
+                        <img
+                          key={index}
+                          src={imageUrl}
+                          alt={`Additional ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  )}
 
                   {slide.price && <p className="price">₪{slide.price}</p>}
                 </div>

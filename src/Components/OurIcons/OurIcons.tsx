@@ -2,9 +2,9 @@
 
 import React from "react";
 import "./OurIcons.scss";
-import vegan from "../../images/Icons/vegan.png";
-import spicy from "../../images/Icons/spicy.png";
-import vegetarian from "../../images/Icons/vegetarian.png";
+import vegan from "../../images/OurIcons/vegan.png";
+import spicy from "../../images/OurIcons/spicy.png";
+import vegetarian from "../../images/OurIcons/vegetarian.png";
 
 
 const OurIcons: React.FC = () => {
