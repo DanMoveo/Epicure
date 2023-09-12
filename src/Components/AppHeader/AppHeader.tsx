@@ -6,6 +6,8 @@ import Stripes from "./Stripes/Stripes";
 import ForkKnifeIcon from "./ForkKnifeIcon/ForkKnifeIcon";
 import Actions from "./Actions/Actions";
 
+
+
 const AppHeader: React.FC = () => {
   return (
     <>

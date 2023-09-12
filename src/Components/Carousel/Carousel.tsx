@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import "./Carousel.scss";
 import arrow from "../../images/Arrow.png";
+import { NavLink } from "react-router-dom";
 
 interface CarouselProps {
   title: string;
@@ -20,9 +21,9 @@ interface CarouselProps {
 
 const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
   return (
-    <div className="container">
+    <div className="CarouselContainer">
       <p className="label">{title}</p>
-      <div className="carousel-container">
+      <div className="carousel">
         <Swiper spaceBetween={180} slidesPerView={2}>
           {slides.map((slide) => (
             <SwiperSlide key={slide.id}>
@@ -50,10 +51,12 @@ const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
           ))}
         </Swiper>
       </div>
-      <button className="button">
-        <h2>All Restaurants</h2>
-        <img src={arrow} alt={arrow} />
-      </button>
+      <NavLink to="/restaurants/All" style={{ textDecoration: "none" }}>
+        <button className="button">
+          <h2>All Restaurants</h2>
+          <img src={arrow} alt={arrow} />
+        </button>
+      </NavLink>
     </div>
   );
 };

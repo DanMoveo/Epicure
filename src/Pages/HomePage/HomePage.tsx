@@ -1,7 +1,6 @@
 // HomePage.tsx
 
 import React from "react";
-import AppHeader from "../../Components/AppHeader/AppHeader";
 import TableImage from "../../Components/TableImage/TableImage";
 import Carousel from "../../Components/Carousel/Carousel";
 import "./HomePage.scss";
@@ -12,7 +11,6 @@ import vegetarian from "../../images/OurIcons/vegetarian.png";
 import OurIcons from "../../Components/OurIcons/OurIcons";
 import ChefOfTheWeek from "../../Components/ChefOfTheWeek/ChefOfTheWeek";
 import AboutUs from "../../Components/AboutUs/AboutUs";
-import AppFooter from "../../Components/AppFooter/AppFooter";
 
 const popularRestaurantSlides = [
   {
@@ -86,7 +84,6 @@ const yossiRestaurantSlides = [
 const HomePage: React.FC = () => {
   return (
     <>
-      <AppHeader />
       <TableImage />
       <Carousel
         title="POPULAR RESTURANT IN EPICURE:"
@@ -97,7 +94,6 @@ const HomePage: React.FC = () => {
       <ChefOfTheWeek />
       <Carousel title="YOSSI'S RESTURANTS:" slides={yossiRestaurantSlides} />
       <AboutUs />
-      <AppFooter />
     </>
   );
 };

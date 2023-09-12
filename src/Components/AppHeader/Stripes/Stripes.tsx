@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import "./Stripes.scss";
 import * as images from "../../../services/images";
-import StripesWindow from "./StripsWindow/StripesWindow"
-
+import StripesWindow from "./StripsWindow/StripesWindow";
 
 const Stripes: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

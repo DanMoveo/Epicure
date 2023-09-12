@@ -1,9 +1,23 @@
 import "./App.css";
-import AllResturantsPage from "./Pages/AllResturantsPage/AllResturantsPage";
-// import HomePage from "./Pages/HomePage/HomePage";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import HomePage from "./Pages/HomePage/HomePage";
+import ResturantsPage from "./Pages/ResturantsPage/ResturantsPage";
+import AppHeader from "./Components/AppHeader/AppHeader";
+import AppFooter from "./Components/AppFooter/AppFooter";
+import RestaurantPage from "./Pages/RestaurantPage/RestaurantPage";
 
 function App() {
-  return <AllResturantsPage />;
+  return (
+    <Router>
+      <AppHeader />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/restaurants/:type" element={<ResturantsPage />} />
+        <Route path="/restaurant/:restaurantId" element={<RestaurantPage />} />
+      </Routes>
+      <AppFooter />
+    </Router>
+  );
 }
 
 export default App;

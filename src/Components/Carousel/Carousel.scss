@@ -1,9 +1,9 @@
 /* Carousel.scss */
 @import "../../services/global-styles.scss";
 
-.container {
-  margin-left: 24px;
-  margin-top: 35px;
+.CarouselContainer {
+  margin-top: 40px;
+  margin-left: 20px;
 
   .label {
     font-family: Helvetica, sans-serif;
@@ -12,7 +12,7 @@
     letter-spacing: 1.25px;
   }
 
-  .carousel-container {
+  .carousel {
     width: 100%;
     display: flex;
 
@@ -46,7 +46,7 @@
           margin-top: -5px;
         }
 
-        .price{
+        .price {
           font-family: Helvetica, sans-serif;
           font-weight: 400;
           font-size: 16px;
@@ -72,6 +72,7 @@
       font-weight: 400;
       font-size: 18px;
       letter-spacing: 2px;
+
     }
   }
 }

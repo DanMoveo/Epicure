@@ -1,5 +1,4 @@
 // Actions.tsx
-
 import React, { useState } from "react";
 import "./Actions.scss";
 import * as images from "../../../services/images";
@@ -12,10 +11,13 @@ const Actions: React.FC = () => {
 
   const openSearchWindow = () => {
     setIsSearchWindowOpen(!isSearchWindowOpen);
+    setIsBagWindowOpen(false);
     console.log("search open");
   };
+
   const openBagWindow = () => {
     setIsBagWindowOpen(!isBagWindowOpen);
+    setIsSearchWindowOpen(false);
   };
 
   return (
