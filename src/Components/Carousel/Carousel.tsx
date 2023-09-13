@@ -51,12 +51,14 @@ const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
           ))}
         </Swiper>
       </div>
-      <NavLink to="/restaurants/All" style={{ textDecoration: "none" }}>
-        <button className="button">
-          <h2>All Restaurants</h2>
-          <img src={arrow} alt={arrow} />
-        </button>
-      </NavLink>
+      <div className="button-container">
+        <NavLink to="/restaurants/All" style={{ textDecoration: "none" }}>
+          <button className="button">
+            <h2>All Restaurants</h2>
+            <img src={arrow} alt={arrow} />
+          </button>
+        </NavLink>
+      </div>
     </div>
   );
 };

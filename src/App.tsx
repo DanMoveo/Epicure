@@ -13,7 +13,10 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/restaurants/:type" element={<ResturantsPage />} />
-        <Route path="/restaurant/:restaurantId" element={<RestaurantPage />} />
+        <Route
+          path="/restaurant/:restaurantName/:type"
+          element={<RestaurantPage />}
+        />
       </Routes>
       <AppFooter />
     </Router>

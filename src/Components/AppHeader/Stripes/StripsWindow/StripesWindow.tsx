@@ -11,9 +11,7 @@ interface Props {
 const StripesWindow: React.FC<Props> = ({ closeModal }) => {
   return (
     <div className="stripes_window">
-      <button className="icon_x" onClick={closeModal}>
-        <img src={images.x} alt="x" />
-      </button>
+        <img src={images.x} alt="x" className="icon_x" onClick={closeModal}/>
       <NavLink to="/restaurants/All" className="stripes_button">
         <button className="stripes_button" onClick={closeModal}>
           Restaurants

@@ -55,6 +55,10 @@
     }
   }
 
+  .button-container {
+    display: flex;
+  
+
   .button {
     display: flex;
     @extend .icon;
@@ -75,4 +79,5 @@
 
     }
   }
+}
 }

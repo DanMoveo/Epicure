@@ -12,9 +12,7 @@ const SearchWindow: React.FC<Props> = ({ closeWindow }) => {
   return (
     <div className="search_window">
       <div className="bar_container">
-        <button className="icon" onClick={closeWindow}>
-          <img src={images.x} alt="x" />
-        </button>
+          <img src={images.x} alt="x" className="icon" onClick={closeWindow}/>
         <h2 className="label">Search</h2>
       </div>
       <div className="input_container">

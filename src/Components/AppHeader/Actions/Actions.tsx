@@ -22,19 +22,11 @@ const Actions: React.FC = () => {
 
   return (
     <div className="actions">
-      <button className="icon">
         <img src={images.search} alt="search" onClick={openSearchWindow} />
-      </button>
       {isSearchWindowOpen && <SearchWindow closeWindow={openSearchWindow} />}
-
-      <button className="icon">
-        <img src={images.user} alt="user" />
-      </button>
-
-      <button className="icon">
-        <img src={images.bag} alt="bag" onClick={openBagWindow} />
-      </button>
-      {isBagWindowOpen && <BagWindow />}
+        <img src={images.user} alt="user" className="icon"/>
+        <img src={images.bag} alt="bag" onClick={openBagWindow} className="icon"/>
+      {isBagWindowOpen && <BagWindow closeWindow={openBagWindow}/>}
     </div>
   );
 };

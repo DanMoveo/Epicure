@@ -1,4 +1,4 @@
-// AllResturantsPage.tsx
+// ResturantsPage.tsx
 
 import React, { useState } from "react";
 import "./ResturantsPage.scss";
@@ -134,7 +134,7 @@ const ResturantsPage: React.FC = () => {
           {tabs[activeTab]?.restaurants?.map((restaurant, index) => (
             <NavLink
               key={index}
-              to={`/restaurant/${formatChefName(restaurant.resturantName)}`}
+              to={`/restaurant/${formatChefName(restaurant.resturantName)}/Brakefast`}
               style={{ textDecoration: "none" }}
             >
               <Card

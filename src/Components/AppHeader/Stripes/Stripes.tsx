@@ -14,9 +14,12 @@ const Stripes: React.FC = () => {
 
   return (
     <>
-      <button className="icon" onClick={openModal}>
-        <img src={images.Stripes} alt="Stripes" />
-      </button>
+      <img
+        src={images.Stripes}
+        alt="Stripes"
+        className="icon"
+        onClick={openModal}
+      />
       {isModalOpen && <StripesWindow closeModal={openModal} />}
     </>
   );
