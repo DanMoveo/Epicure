@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import "./ResturantsPage.scss";
-import * as image from "../../services/images";
+import * as image from "../../Services/Images";
 import { NavLink } from "react-router-dom";
 import Card from "../../Components/Card/Card";
 import { useNavigate, useParams } from "react-router-dom";
@@ -30,16 +30,13 @@ const ResturantsPage: React.FC = () => {
         {
           image: image.nithan_thai,
           resturantName: "Nitan Thai",
-        
+
           chefName: "Shahaf Shabta",
-        
         },
       ],
-      
     },
-    
+
     {
-      
       label: "New",
       restaurants: [
         {
@@ -113,8 +110,6 @@ const ResturantsPage: React.FC = () => {
     navigate(`/restaurants/${formatChefName(tabs[index].label)}`);
   };
 
-  
-
   return (
     <div className="container">
       <h2 className="title">RESTAURANTS</h2>
@@ -134,7 +129,9 @@ const ResturantsPage: React.FC = () => {
           {tabs[activeTab]?.restaurants?.map((restaurant, index) => (
             <NavLink
               key={index}
-              to={`/restaurant/${formatChefName(restaurant.resturantName)}/Brakefast`}
+              to={`/restaurant/${formatChefName(
+                restaurant.resturantName
+              )}/Brakefast`}
               style={{ textDecoration: "none" }}
             >
               <Card

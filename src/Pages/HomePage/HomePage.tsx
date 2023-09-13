@@ -4,13 +4,14 @@ import React from "react";
 import TableImage from "../../Components/TableImage/TableImage";
 import Carousel from "../../Components/Carousel/Carousel";
 import "./HomePage.scss";
-import resturant from "../../images/ResturantImages/claro.png";
-import vegan from "../../images/OurIcons/vegan.png";
-import spicy from "../../images/OurIcons/spicy.png";
-import vegetarian from "../../images/OurIcons/vegetarian.png";
+import resturant from "../../Images/ResturantImages/claro.png";
+import vegan from "../../Images/OurIcons/vegan.png";
+import spicy from "../../Images/OurIcons/spicy.png";
+import vegetarian from "../../Images/OurIcons/vegetarian.png";
 import OurIcons from "../../Components/OurIcons/OurIcons";
 import ChefOfTheWeek from "../../Components/ChefOfTheWeek/ChefOfTheWeek";
 import AboutUs from "../../Components/AboutUs/AboutUs";
+import { text } from "../../Services/textConstants";
 
 const popularRestaurantSlides = [
   {
@@ -86,13 +87,16 @@ const HomePage: React.FC = () => {
     <>
       <TableImage />
       <Carousel
-        title="POPULAR RESTURANT IN EPICURE:"
+        title={text.popularRestaurantTitle}
         slides={popularRestaurantSlides}
       />
-      <Carousel title="SIGNATURE DISH OF:" slides={signatureDish} />
+      <Carousel title={text.signatureDishTitle} slides={signatureDish} />
       <OurIcons></OurIcons>
       <ChefOfTheWeek />
-      <Carousel title="YOSSI'S RESTURANTS:" slides={yossiRestaurantSlides} />
+      <Carousel
+        title={text.yossiRestaurantTitle}
+        slides={yossiRestaurantSlides}
+      />
       <AboutUs />
     </>
   );

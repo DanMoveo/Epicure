@@ -4,7 +4,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import "./Carousel.scss";
-import arrow from "../../images/Arrow.png";
+import arrow from "../../Images/Arrow.png";
 import { NavLink } from "react-router-dom";
 
 interface CarouselProps {
@@ -33,7 +33,7 @@ const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
                   <h2 className="title">{slide.title}</h2>
                   <p className="description">{slide.descriptionORchef}</p>
                   {slide.additionalImage && (
-                    <div className="additional-images">
+                    <div className="additional-Images">
                       {slide.additionalImage.map((imageUrl, index) => (
                         <img
                           key={index}

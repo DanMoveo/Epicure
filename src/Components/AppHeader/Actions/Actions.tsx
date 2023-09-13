@@ -1,7 +1,7 @@
 // Actions.tsx
 import React, { useState } from "react";
 import "./Actions.scss";
-import * as images from "../../../services/images";
+import * as Images from "../../../Services/Images";
 import BagWindow from "./BagWindow/BagWindow";
 import SearchWindow from "./SearchWindow/SearchWindow";
 
@@ -22,11 +22,16 @@ const Actions: React.FC = () => {
 
   return (
     <div className="actions">
-        <img src={images.search} alt="search" onClick={openSearchWindow} />
+      <img src={Images.search} alt="search" onClick={openSearchWindow} />
       {isSearchWindowOpen && <SearchWindow closeWindow={openSearchWindow} />}
-        <img src={images.user} alt="user" className="icon"/>
-        <img src={images.bag} alt="bag" onClick={openBagWindow} className="icon"/>
-      {isBagWindowOpen && <BagWindow closeWindow={openBagWindow}/>}
+      <img src={Images.user} alt="user" className="icon" />
+      <img
+        src={Images.bag}
+        alt="bag"
+        onClick={openBagWindow}
+        className="icon"
+      />
+      {isBagWindowOpen && <BagWindow closeWindow={openBagWindow} />}
     </div>
   );
 };

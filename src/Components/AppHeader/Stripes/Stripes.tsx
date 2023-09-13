@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import "./Stripes.scss";
-import * as images from "../../../services/images";
+import * as Images from "../../../Services/Images";
 import StripesWindow from "./StripsWindow/StripesWindow";
 
 const Stripes: React.FC = () => {
@@ -15,7 +15,7 @@ const Stripes: React.FC = () => {
   return (
     <>
       <img
-        src={images.Stripes}
+        src={Images.Stripes}
         alt="Stripes"
         className="icon"
         onClick={openModal}

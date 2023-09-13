@@ -1,26 +1,25 @@
-// images.ts
+// Images.ts
 
-import Stripes from "../images/AppHeader/stripes.png";
-import search from "../images/AppHeader/search.png";
-import user from "../images/AppHeader/user.png";
-import bag from "../images/AppHeader/bag.png";
-import forkKnifeIcon from "../images/AppHeader/fork.png";
-import table from "../images/AppHeader/table.png";
-import x from "../images/AppHeader/x.png";
-import big_bag from "../images/AppHeader/big_bag.png";
-import claro from "../images/ResturantImages/claro.png";
-import kab_kem from "../images/ResturantImages/kab-kem.png";
-import kab_kem2 from "../images/ResturantImages/kab-kem2.png";
-import messa from "../images/ResturantImages/messa.png";
-import nithan_thai from "../images/ResturantImages/nithan-thai.png";
-import tiger_lily from "../images/ResturantImages/tiger-lily.png";
-import yapan from "../images/ResturantImages/yapan.png";
-import pad_ki_mao from "../images/dishes/pad-ki-mao.png";
-import red_farm from "../images/dishes/red-farm.png";
-import ta_ma_la_ko from "../images/dishes/ta-ma-la-ko.png";
-import clock from "../images/clock.png";
-import line from "../images/line.png"
-
+import Stripes from "../Images/AppHeader/stripes.png";
+import search from "../Images/AppHeader/search.png";
+import user from "../Images/AppHeader/user.png";
+import bag from "../Images/AppHeader/bag.png";
+import forkKnifeIcon from "../Images/AppHeader/fork.png";
+import table from "../Images/AppHeader/table.png";
+import x from "../Images/AppHeader/x.png";
+import big_bag from "../Images/AppHeader/big_bag.png";
+import claro from "../Images/ResturantImages/claro.png";
+import kab_kem from "../Images/ResturantImages/kab-kem.png";
+import kab_kem2 from "../Images/ResturantImages/kab-kem2.png";
+import messa from "../Images/ResturantImages/messa.png";
+import nithan_thai from "../Images/ResturantImages/nithan-thai.png";
+import tiger_lily from "../Images/ResturantImages/tiger-lily.png";
+import yapan from "../Images/ResturantImages/yapan.png";
+import pad_ki_mao from "../Images/dishes/pad-ki-mao.png";
+import red_farm from "../Images/dishes/red-farm.png";
+import ta_ma_la_ko from "../Images/dishes/ta-ma-la-ko.png";
+import clock from "../Images/clock.png";
+import line from "../Images/line.png";
 
 export {
   Stripes,
@@ -42,5 +41,5 @@ export {
   red_farm,
   ta_ma_la_ko,
   clock,
-  line
+  line,
 };

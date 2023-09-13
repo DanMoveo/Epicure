@@ -2,7 +2,7 @@
 
 import React from "react";
 import "./Card.scss";
-import * as imagee from "../../services/images";
+import * as imagee from "../../Services/Images";
 
 interface CardProps {
   image: string;

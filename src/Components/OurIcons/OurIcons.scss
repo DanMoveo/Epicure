@@ -20,6 +20,15 @@
     align-items: center;
     justify-content: center;
 
+    .iconVegitarian
+    {
+      @extend .icon;
+      width: 46px;
+      height: 36px;
+      margin-bottom: 17px;
+      margin-left: 20px;
+    }
+
     .ourIcon {
       padding: 20px;
 

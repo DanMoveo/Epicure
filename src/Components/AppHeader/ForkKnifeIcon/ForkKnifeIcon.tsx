@@ -2,13 +2,13 @@
 
 import React from "react";
 import "./ForkKnifeIcon.scss";
-import * as images from "../../../services/images";
+import * as Images from "../../../Services/Images";
 import { NavLink } from "react-router-dom";
 
 const ForkKnifeIcon: React.FC = () => {
   return (
     <NavLink to="/">
-      <img src={images.forkKnifeIcon} alt="Stripes" className="icon" />
+      <img src={Images.forkKnifeIcon} alt="Stripes" className="iconFork" />
     </NavLink>
   );
 };

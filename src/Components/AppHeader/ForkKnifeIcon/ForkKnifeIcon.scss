@@ -1,5 +1,6 @@
 @import "../../../services/global-styles.scss";
 
-icon {
+.iconFork {
   @extend .icon;
+  margin-left: 47px;
 }

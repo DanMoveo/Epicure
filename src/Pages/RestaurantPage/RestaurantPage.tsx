@@ -1,20 +1,16 @@
 // RestaurantPage.tsx
 
 import React, { useState } from "react";
-import * as image from "../../services/images";
+import * as image from "../../Services/Images";
 import Card from "../../Components/Card/Card";
 import "./RestaurantPage.scss";
 import { useNavigate, useParams } from "react-router-dom";
 
 const RestaurantPage: React.FC = () => {
   const tabs = ["Brakefast", "Lunch", "Dinner"];
-
   const navigate = useNavigate();
-  const { type } = useParams();
-  const initialActiveTab = type ? tabs.findIndex((tab) => tab === type) : 0;
-  const [activeTab, setActiveTab] = useState(initialActiveTab);
+  const [activeTab, setActiveTab] = useState(0);
   const { restaurantName } = useParams<{ restaurantName: string }>();
-
 
   const restaurants = [
     {

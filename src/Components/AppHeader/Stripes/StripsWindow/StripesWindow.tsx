@@ -1,7 +1,7 @@
 // StripesWindow.tsx
 
 import "./StripesWindow.scss";
-import * as images from "../../../../services/images";
+import * as Images from "../../../../Services/Images";
 import { NavLink } from "react-router-dom";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 const StripesWindow: React.FC<Props> = ({ closeModal }) => {
   return (
     <div className="stripes_window">
-        <img src={images.x} alt="x" className="icon_x" onClick={closeModal}/>
+      <img src={Images.x} alt="x" className="icon_x" onClick={closeModal} />
       <NavLink to="/restaurants/All" className="stripes_button">
         <button className="stripes_button" onClick={closeModal}>
           Restaurants

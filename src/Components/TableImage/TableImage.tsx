@@ -2,18 +2,18 @@
 
 import React from "react";
 import "./TableImage.scss";
-import * as images from "../../services/images";
+import * as Images from "../../Services/Images";
 
 const TableImage: React.FC = () => {
   return (
     <div className="img-container">
-      <img src={images.table} alt="table" className="hero-img" />
+      <img src={Images.table} alt="table" className="hero-img" />
       <div className="hero_window">
         <h2 className="text">
           Epicure works with the top chef restaurants in Tel Aviv
         </h2>
         <div className="input-container">
-          <img src={images.search} alt="search" className="icon" />
+          <img src={Images.search} alt="search" className="icon" />
           <input
             type="text"
             name="search-input"

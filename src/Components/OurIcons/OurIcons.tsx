@@ -2,10 +2,9 @@
 
 import React from "react";
 import "./OurIcons.scss";
-import vegan from "../../images/OurIcons/vegan.png";
-import spicy from "../../images/OurIcons/spicy.png";
-import vegetarian from "../../images/OurIcons/vegetarian.png";
-
+import vegan from "../../Images/OurIcons/vegan.png";
+import spicy from "../../Images/OurIcons/spicy.png";
+import vegetarian from "../../Images/OurIcons/vegetarian.png";
 
 const OurIcons: React.FC = () => {
   return (
@@ -19,7 +18,7 @@ const OurIcons: React.FC = () => {
           </div>
 
           <div className="ourIcon">
-            <img src={vegetarian} alt="vegitarian" className="icon" />
+            <img src={vegetarian} alt="vegitarian" className="iconVegitarian" />
             <h1 className="label">Vegitarian</h1>
           </div>
 
