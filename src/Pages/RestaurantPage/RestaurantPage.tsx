@@ -130,6 +130,7 @@ const RestaurantPage: React.FC = () => {
           <li key={index}>
             {tabs[activeTab] === dish.category && (
               <Card
+              key={index} 
                 image={dish.image}
                 restaurantName={dish.name}
                 chefName={dish.description}

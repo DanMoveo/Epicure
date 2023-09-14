@@ -5,8 +5,7 @@ import "./AppHeader.scss";
 import Stripes from "./Stripes/Stripes";
 import ForkKnifeIcon from "./ForkKnifeIcon/ForkKnifeIcon";
 import Actions from "./Actions/Actions";
-
-
+import TextButtons from "../TextButtons/TextButtons";
 
 const AppHeader: React.FC = () => {
   return (
@@ -14,6 +13,7 @@ const AppHeader: React.FC = () => {
       <div className="app-header">
         <Stripes></Stripes>
         <ForkKnifeIcon></ForkKnifeIcon>
+        <TextButtons />
         <Actions></Actions>
       </div>
     </>

@@ -7,8 +7,11 @@ import { NavLink } from "react-router-dom";
 
 const ForkKnifeIcon: React.FC = () => {
   return (
-    <NavLink to="/">
-      <img src={Images.forkKnifeIcon} alt="Stripes" className="iconFork" />
+    <NavLink to="/" style={{ textDecoration: "none" }}>
+      <div className="epicureLogoContainer">
+      <img src={Images.forkKnifeIcon} alt="iconFork" className="iconFork" />
+        <h2 className="epicureLogo">EPICURE</h2>
+        </div>
     </NavLink>
   );
 };

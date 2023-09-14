@@ -20,6 +20,15 @@ import red_farm from "../Images/dishes/red-farm.png";
 import ta_ma_la_ko from "../Images/dishes/ta-ma-la-ko.png";
 import clock from "../Images/clock.png";
 import line from "../Images/line.png";
+import spicy from "../Images/OurIcons/spicy.png";
+import vegan from "../Images/OurIcons/vegan.png";
+import vegetarian from "../Images/OurIcons/vegetarian.png";
+import spicyBig from "../Images/OurIcons/spicyBig.png";
+import veganBig from "../Images/OurIcons/veganBig.png";
+import vegetarianBig from "../Images/OurIcons/vegetarianBig.png";
+import yossi from "../Images/yossi.png";
+
+
 
 export {
   Stripes,
@@ -42,4 +51,11 @@ export {
   ta_ma_la_ko,
   clock,
   line,
+  spicy,
+  vegan,
+  vegetarian,
+  spicyBig,
+  veganBig,
+  vegetarianBig,
+  yossi
 };

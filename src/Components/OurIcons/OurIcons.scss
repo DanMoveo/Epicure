@@ -5,6 +5,9 @@
   flex-direction: column;
   background-color: #fafafa;
   align-items: center;
+  @media (min-width: 768px) {
+    margin-top: 30px;
+    margin-bottom: 30px;  }
 
   .title {
     font-family: Helvetica, sans-serif;
@@ -12,6 +15,9 @@
     font-size: 18px;
     letter-spacing: 1.25px;
     line-height: 35px;
+    @media (min-width: 768px) {
+      font-size: 30px;
+    }
   }
 
   .ourIconContainer {
@@ -19,9 +25,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
 
-    .iconVegitarian
-    {
+    .iconVegitarian {
       @extend .icon;
       width: 46px;
       height: 36px;
@@ -29,7 +37,19 @@
       margin-left: 20px;
     }
 
+    .iconVegitarianBig {
+      width: 77px;
+      height: 60px;
+      margin-left: 15px;
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+
     .ourIcon {
+      @media (min-width: 768px) {
+        padding: 30px;
+      }
       padding: 20px;
 
       .icon {
@@ -37,6 +57,17 @@
         width: 46px;
         height: 36px;
         margin-bottom: 17px;
+        @media (min-width: 768px) {
+          display: none;
+        }
+      }
+
+      .iconBig {
+        width: 77px;
+        height: 60px;
+        @media (max-width: 768px) {
+          display: none;
+        }
       }
 
       .label {
@@ -44,6 +75,9 @@
         font-weight: 200;
         font-size: 18px;
         letter-spacing: 1.97px;
+        @media (min-width: 768px) {
+          font-size: 24px;
+        }
       }
     }
   }

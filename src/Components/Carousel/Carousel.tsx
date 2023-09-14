@@ -4,8 +4,8 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import "./Carousel.scss";
-import arrow from "../../Images/Arrow.png";
-import { NavLink } from "react-router-dom";
+import Card from "../Card/Card";
+
 
 interface CarouselProps {
   title: string;
@@ -51,13 +51,18 @@ const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
           ))}
         </Swiper>
       </div>
-      <div className="button-container">
-        <NavLink to="/restaurants/All" style={{ textDecoration: "none" }}>
-          <button className="button">
-            <h2>All Restaurants</h2>
-            <img src={arrow} alt={arrow} />
-          </button>
-        </NavLink>
+
+      <div className="cardContainer">
+        {slides.map((restaurant, index) => (
+          <Card
+          key={index} 
+            image={slides[index].dishImage}
+            restaurantName={slides[index].title}
+            chefName={slides[index].descriptionORchef}
+            price={slides[index].price}
+            additionalImage={slides[index].additionalImage}
+            />
+            ))}
       </div>
     </div>
   );

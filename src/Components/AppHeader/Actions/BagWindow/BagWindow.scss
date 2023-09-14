@@ -4,11 +4,16 @@
   position: fixed;
   flex-direction: column;
   top: 0;
-  left: 0;
+  right: 0;
   width: 100%;
   height: 40%;
   background-color: white;
   z-index: 9999;
+  @media (min-width: 768px) {
+    width: 497px;
+    height: 586px;
+    margin-top: 46px;
+  }
 
   .icon {
     @extend .icon;
@@ -20,8 +25,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-right: 47px;
+    @media (min-width: 768px) {
+      margin-top: 170px;
+
+    }
 
     .bag_icon {
       @extend .icon;
@@ -36,6 +45,17 @@
       font-size: 24px;
       font-weight: 200;
       letter-spacing: 1.3px;
+    }
+
+    .orderButton {
+      @extend .icon;
+      border: 1px solid #000;
+      padding: 8px 8px;
+      margin-top: 150px;
+      margin-left: 30px;
+      @media (max-width: 768px) {
+        display: none;
+      }
     }
   }
 }

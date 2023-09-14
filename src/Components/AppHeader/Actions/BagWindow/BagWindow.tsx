@@ -15,6 +15,7 @@ const BagWindow: React.FC<Props> = ({ closeWindow }) => {
       <div className="bagContainer">
         <img src={Images.big_bag} alt="bag" className="bag_icon" />
         <h2 className="text_bag_window">YOUR BAG IS EMPTY</h2>
+        <button className="orderButton">ORDER HISTORY</button>
       </div>
     </div>
   );

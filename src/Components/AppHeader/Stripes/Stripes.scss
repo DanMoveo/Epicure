@@ -1,7 +1,13 @@
+// Stripes.scss
+
 @import "../../../services/global-styles.scss";
 
-icon {
+.stripesIcon {
   @extend .icon;
+
+  @media (min-width: 768px) {
+    display: none; // Hide the Stripes on screens wider than 768px (adjust as needed)
+  }
 }
 
 .stripes_window {

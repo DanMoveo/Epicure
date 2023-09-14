@@ -1,0 +1,19 @@
+@import "../../services/global-styles.scss";
+
+.textButtonsContainer {
+  margin-right: 465px;
+  margin-left: 30px;
+
+  .textButton {
+    font-family: Helvetica, sans-serif;
+    font-weight: 200;
+    font-size: 18px;
+    letter-spacing: 1.92px;
+    line-height: 21px;
+    @extend .icon;
+    padding: 20px;
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
+}

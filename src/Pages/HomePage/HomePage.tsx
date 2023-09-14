@@ -12,6 +12,7 @@ import OurIcons from "../../Components/OurIcons/OurIcons";
 import ChefOfTheWeek from "../../Components/ChefOfTheWeek/ChefOfTheWeek";
 import AboutUs from "../../Components/AboutUs/AboutUs";
 import { text } from "../../Services/textConstants";
+import AllRestaurnsButton from "../../Components/AllRestaurnsButton/AllRestaurnsButton";
 
 const popularRestaurantSlides = [
   {
@@ -90,13 +91,19 @@ const HomePage: React.FC = () => {
         title={text.popularRestaurantTitle}
         slides={popularRestaurantSlides}
       />
+      <AllRestaurnsButton />
       <Carousel title={text.signatureDishTitle} slides={signatureDish} />
+      <div className="hiddingFromDesktop">
+        <AllRestaurnsButton />
+      </div>
       <OurIcons></OurIcons>
       <ChefOfTheWeek />
-      <Carousel
-        title={text.yossiRestaurantTitle}
-        slides={yossiRestaurantSlides}
-      />
+      <div className="hiddingFromDesktop">
+        <Carousel
+          title={text.yossiRestaurantTitle}
+          slides={yossiRestaurantSlides}
+        />
+      </div>
       <AboutUs />
     </>
   );

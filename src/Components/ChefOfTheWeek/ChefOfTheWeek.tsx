@@ -2,18 +2,49 @@
 
 import React from "react";
 import "./ChefOfTheWeek.scss";
-import yossi from "../../Images/yossi.png";
 import { text } from "../../Services/textConstants";
+import * as image from "../../Services/Images";
+import Card from "../Card/Card";
+
+const restaurants = [
+  {
+    image: image.nithan_thai,
+    resturantName: "Onza",
+    chefName: "Chef 10",
+  },
+  {
+    image: image.nithan_thai,
+    resturantName: "Kitchen Market",
+    chefName: "Chef 11",
+  },
+  {
+    image: image.nithan_thai,
+    resturantName: "Mashya safdg sojfglk jdhfkjhg dsjkfgh jdfjgh dsmfg ",
+    chefName: "Chef 12",
+  },
+];
 
 const ChefOfTheWeek: React.FC = () => {
   return (
     <div className="container">
-      <h2 className="title">CHEF OF THE WEEK:</h2>
-      <img src={yossi} alt="yossi"></img>
-      <div className="window">
-        <h2 className="yossi">{text.chefOfTheWeekName}</h2>
+      <span className="title">CHEF OF THE WEEK:</span>
+      <div className="chefOfTheWeekContainer">
+        <img src={image.yossi} alt="yossi" className="chefOfTheWeekImage"></img>
+        <div className="window">
+          <span className="chefName">{text.chefOfTheWeekName}</span>
+        </div>
+        <p className="text">{text.chefOfTheWeekText}</p>
+        <span className="chefRestaurants">{text.chefRestaurants}</span>
       </div>
-      <p className="text">{text.chefOfTheWeekText}</p>
+      <div className="cardWeekChefContainer">
+        {restaurants.map((restaurant, index) => (
+          <Card
+          key={index} 
+            image={restaurants[index].image}
+            restaurantName={restaurants[index].resturantName}
+          />
+        ))}
+      </div>
     </div>
   );
 };
