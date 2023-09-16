@@ -16,6 +16,7 @@ interface CarouselProps {
     descriptionORchef?: string;
     price?: string;
     additionalImage?: string[];
+    rating?: number;
   }[];
 }
 
@@ -54,6 +55,7 @@ const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
 
       <div className="cardContainer">
         {slides.map((restaurant, index) => (
+          
           <Card
           key={index} 
             image={slides[index].dishImage}
@@ -61,6 +63,7 @@ const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
             chefName={slides[index].descriptionORchef}
             price={slides[index].price}
             additionalImage={slides[index].additionalImage}
+            rating={slides[index].rating}
             />
             ))}
       </div>

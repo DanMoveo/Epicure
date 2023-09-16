@@ -19,7 +19,7 @@ const restaurants = [
   },
   {
     image: image.nithan_thai,
-    resturantName: "Mashya safdg sojfglk jdhfkjhg dsjkfgh jdfjgh dsmfg ",
+    resturantName: "Mashya",
     chefName: "Chef 12",
   },
 ];
@@ -29,17 +29,21 @@ const ChefOfTheWeek: React.FC = () => {
     <div className="container">
       <span className="title">CHEF OF THE WEEK:</span>
       <div className="chefOfTheWeekContainer">
-        <img src={image.yossi} alt="yossi" className="chefOfTheWeekImage"></img>
-        <div className="window">
-          <span className="chefName">{text.chefOfTheWeekName}</span>
-        </div>
+          <img
+            src={image.yossi}
+            alt="yossi"
+            className="chefOfTheWeekImage"
+          ></img>
+          <div className="window">
+            <span className="chefName">{text.chefOfTheWeekName}</span>
+          </div>
         <p className="text">{text.chefOfTheWeekText}</p>
         <span className="chefRestaurants">{text.chefRestaurants}</span>
       </div>
       <div className="cardWeekChefContainer">
         {restaurants.map((restaurant, index) => (
           <Card
-          key={index} 
+            key={index}
             image={restaurants[index].image}
             restaurantName={restaurants[index].resturantName}
           />

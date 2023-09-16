@@ -13,6 +13,7 @@ import ChefOfTheWeek from "../../Components/ChefOfTheWeek/ChefOfTheWeek";
 import AboutUs from "../../Components/AboutUs/AboutUs";
 import { text } from "../../Services/textConstants";
 import AllRestaurnsButton from "../../Components/AllRestaurnsButton/AllRestaurnsButton";
+import AboutUsDesktop from "../../Components/AboutUsDesktop/AboutUsDesktop";
 
 const popularRestaurantSlides = [
   {
@@ -20,18 +21,21 @@ const popularRestaurantSlides = [
     title: "Claro",
     descriptionORchef: "Ran Shamir",
     dishImage: resturant,
+    rating: 3,
   },
   {
     id: 2,
     title: "Lumia",
     descriptionORchef: "Meir Adonie",
     dishImage: resturant,
+    rating: 2,
   },
   {
     id: 3,
-    title: "Beach Sunset",
+    title: "Claro",
     descriptionORchef: "Ran Shamir",
     dishImage: resturant,
+    rating: 1,
   },
 ];
 
@@ -105,6 +109,7 @@ const HomePage: React.FC = () => {
         />
       </div>
       <AboutUs />
+      <AboutUsDesktop />
     </>
   );
 };

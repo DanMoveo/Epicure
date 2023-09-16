@@ -9,10 +9,13 @@
     font-size: 18px;
     line-height: 28px;
     letter-spacing: 1.92px;
+    @media (min-width: 768px) {
+      display: none;
+    }
   }
 
-  .tabContainer
-    .tab-list {
+  .tabsContainer {
+    .tabList {
       list-style-type: none;
       display: flex;
       padding: 0;
@@ -22,17 +25,61 @@
       font-size: 18px;
       letter-spacing: 1px;
       margin-bottom: 20px;
-
+      @media (min-width: 768px) {
+        justify-content: center;
+        gap: 10px;
+      }
     }
 
-    .tab-item {
+    .tabItem {
       cursor: pointer;
       padding: 7px 7px;
       transition: background-color 0.3s ease;
 
       &.active {
+        font-weight: 400;
         background-color: #fff;
         border-bottom: 2px solid #de9200e5;
+        @media (min-width: 768px) {
+          border-bottom: 2px solid #fff;
+        }
+      }
+    }
+
+    .tabItemDesktop {
+      cursor: pointer;
+      padding: 7px 7px;
+      transition: background-color 0.3s ease;
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    .filtersContainer {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      background-color: #fafafa;
+      padding: 15px;
+      margin-top: 30px;
+      @media (max-width: 768px) {
+        display: none;
+      }
+
+      .filter {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        .filterText {
+          font-family: Helvetica, sans-serif;
+          font-weight: 200;
+          font-size: 18px;
+          line-height: 21.76px;
+          letter-spacing: 1.92px;
+        }
       }
     }
 
@@ -42,7 +89,12 @@
       align-items: center;
       gap: 30px;
       padding-inline-start: 0;
-
-
+      @media (min-width: 768px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 20px;
+      }
     }
   }
+}

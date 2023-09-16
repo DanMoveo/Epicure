@@ -8,94 +8,67 @@ import Card from "../../Components/Card/Card";
 import { useNavigate, useParams } from "react-router-dom";
 
 const ResturantsPage: React.FC = () => {
-  const tabs = [
-    {
-      label: "All",
-      restaurants: [
-        {
-          image: image.claro,
-          resturantName: "Claro",
-          chefName: "Ran Shmueli",
-        },
-        {
-          image: image.kab_kem,
-          resturantName: "Kab Kem",
-          chefName: "Yariv Malili",
-        },
-        {
-          image: image.messa,
-          resturantName: "Messa",
-          chefName: "Aviv Moshe",
-        },
-        {
-          image: image.nithan_thai,
-          resturantName: "Nitan Thai",
+  const tabs = ["All", "New", "Most Popular", "Open Now"];
 
-          chefName: "Shahaf Shabta",
-        },
-      ],
-    },
-
+  const restaurants = [
     {
-      label: "New",
-      restaurants: [
-        {
-          image: image.nithan_thai,
-          resturantName: "New Restaurant 1",
-          chefName: "Chef 4",
-        },
-        {
-          image: image.nithan_thai,
-          resturantName: "New Restaurant 2",
-          chefName: "Chef 5",
-        },
-      ],
+      image: image.claro,
+      resturantName: "Claro",
+      chefName: "Ran Shmueli",
+      isNew: false,
+      isMostPopular: false,
+      isOpenNow: true,
+      rate: 2,
     },
     {
-      label: "Most Popular",
-      restaurants: [
-        {
-          image: image.nithan_thai,
-          resturantName: "Popular Restaurant 1",
-          chefName: "Chef 7",
-        },
-        {
-          image: image.nithan_thai,
-          resturantName: "Popular Restaurant 2",
-          chefName: "Chef 8",
-        },
-        {
-          image: image.nithan_thai,
-          resturantName: "Popular Restaurant 3",
-          chefName: "Chef 9",
-        },
-      ],
+      image: image.kab_kem,
+      resturantName: "Kab Kem",
+      chefName: "Yariv Malili",
+      isNew: false,
+      isMostPopular: true,
+      isOpenNow: false,
+      rate: 3,
     },
     {
-      label: "Open Now",
-      restaurants: [
-        {
-          image: image.nithan_thai,
-          resturantName: "Open Restaurant 1",
-          chefName: "Chef 10",
-        },
-        {
-          image: image.nithan_thai,
-          resturantName: "Open Restaurant 2",
-          chefName: "Chef 11",
-        },
-        {
-          image: image.nithan_thai,
-          resturantName: "Open Restaurant 3",
-          chefName: "Chef 12",
-        },
-      ],
+      image: image.messa,
+      resturantName: "Messa",
+      chefName: "Aviv Moshe",
+      isNew: false,
+      isMostPopular: true,
+      isOpenNow: true,
+      rate: 4,
+    },
+    {
+      image: image.nithan_thai,
+      resturantName: "Nitan Thai",
+      chefName: "Shahaf Shabta",
+      isNew: true,
+      isMostPopular: false,
+      isOpenNow: false,
+      rate: 3,
+    },
+    {
+      image: image.nithan_thai,
+      resturantName: "Nitan Thai",
+      chefName: "Shahaf Shabta",
+      isNew: true,
+      isMostPopular: false,
+      isOpenNow: false,
+      rate: 2,
+    },
+    {
+      image: image.nithan_thai,
+      resturantName: "Nitan Thai",
+      chefName: "Shahaf Shabta",
+      isNew: true,
+      isMostPopular: false,
+      isOpenNow: false,
+      rate: 5,
     },
   ];
+
   const { type } = useParams();
-  const initialActiveTab = type
-    ? tabs.findIndex((tab) => tab.label === type)
-    : 0;
+  const initialActiveTab = type ? tabs.indexOf(type) : 0;
   const [activeTab, setActiveTab] = useState(initialActiveTab);
   const navigate = useNavigate();
 
@@ -107,26 +80,65 @@ const ResturantsPage: React.FC = () => {
 
   const handleTabClick = (index: number) => {
     setActiveTab(index);
-    navigate(`/restaurants/${formatChefName(tabs[index].label)}`);
+    navigate(`/restaurants/${formatChefName(tabs[index])}`);
   };
+
+  const filterRestaurants = () => {
+    const activeTabLabel = tabs[activeTab];
+
+    if (activeTabLabel === "All") {
+      return restaurants;
+    }
+
+    return restaurants.filter((restaurant) => {
+      if (activeTabLabel === "New") {
+        return restaurant.isNew;
+      } else if (activeTabLabel === "Most Popular") {
+        return restaurant.isMostPopular;
+      } else if (activeTabLabel === "Open Now") {
+        return restaurant.isOpenNow;
+      }
+      return false;
+    });
+  };
+
+  const filteredRestaurants = filterRestaurants();
 
   return (
     <div className="container">
       <h2 className="title">RESTAURANTS</h2>
-      <div className="tabContainer">
-        <ul className="tab-list">
+      <div className="tabsContainer">
+        <ul className="tabList">
           {tabs.map((tab, index) => (
             <li
               key={index}
-              className={`tab-item ${index === activeTab ? "active" : ""}`}
+              className={`tabItem ${index === activeTab ? "active" : ""}`}
               onClick={() => handleTabClick(index)}
             >
-              {tab.label}
+              {tab}
             </li>
           ))}
+          <span className="tabItemDesktop">Map View</span>
         </ul>
+
+        <div className="filtersContainer">
+          <div className="filter">
+          <span className="filterText">Price Range</span>
+          <img src={ image.arrowDown} alt="arrow down"/>
+          </div>
+          <div className="filter">
+          <span className="filterText">Distance</span>
+          <img src={image.arrowDown} alt="arrow down" />
+          </div>
+          <div className="filter">
+          <span className="filterText">Rating</span>
+            <img src={image.arrowDown} alt="arrow down" />
+            </div>
+
+        </div>
+
         <div className="listContainer">
-          {tabs[activeTab]?.restaurants?.map((restaurant, index) => (
+          {filteredRestaurants.map((restaurant, index) => (
             <NavLink
               key={index}
               to={`/restaurant/${formatChefName(
@@ -138,6 +150,7 @@ const ResturantsPage: React.FC = () => {
                 image={restaurant.image}
                 restaurantName={restaurant.resturantName}
                 chefName={restaurant.chefName}
+                rating={restaurant.rate}
               />
             </NavLink>
           ))}

@@ -1,29 +1,28 @@
 @import "../../services/global-styles.scss";
 
-
 .button {
-    display: flex;
-    align-items: center;
-    @extend .icon;
-    margin-top: 8px;
+  display: flex;
+  align-items: center;
+  @extend .icon;
+  margin-top: 8px;
+  margin-left: 7vw;
+  @media (min-width: 768px) {
+    margin-left: 73.5vw;
+    width: 230px;
+  }
+
+  img {
+    margin-left: 12px;
+    height: 24px;
+    width: 24px;
+  }
+  h2 {
+    font-family: Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 2px;
     @media (min-width: 768px) {
-      margin-left: 76vw;
-      width: 230px;
-    }
-
-    img {
-      margin-left: 12px;
-      height: 24px;
-      width: 24px;
-  }
-    h2 {
-      font-family: Helvetica, sans-serif;
-      font-weight: 400;
-      font-size: 18px;
-      letter-spacing: 2px;
-      @media (min-width: 768px) {
-        font-size: 24px;
-      }
-
+      font-size: 24px;
     }
   }
+}

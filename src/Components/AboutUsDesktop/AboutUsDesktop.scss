@@ -1,0 +1,50 @@
+.aboutUsDesktopContainer {
+  display: flex;
+  background-color: #fafafa;
+  padding: 60px;
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 917px;
+    height: 449px;
+
+    .title {
+      font-family: Helvetica, sans-serif;
+      font-weight: 200;
+      font-size: 30px;
+      line-height: 35px;
+      letter-spacing: 2.14px;
+    }
+
+    .text {
+      width: 569px;
+      margin-top: -18px;
+      font-family: Helvetica, sans-serif;
+      font-weight: 200;
+      font-size: 20px;
+      line-height: 30px;
+      letter-spacing: 2.14px;
+    }
+    .iconContainer {
+      display: flex;
+      gap: 24px;
+      .icon {
+        width: 150px;
+      }
+    }
+  }
+  .logoContainer {
+    display: flex;
+    align-items: center;
+
+    .logo {
+      width: 178px;
+      height: 166px;
+    }
+  }
+}

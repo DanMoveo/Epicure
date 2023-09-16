@@ -8,21 +8,18 @@
     @media (min-width: 768px) {
       display: flex;
       justify-content: center;
-      font-size: 40px;
+      font-size: 40px !important;
     }
   }
 
   .chefOfTheWeekContainer {
-    margin-left: 45px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
     .chefOfTheWeekImage {
-      width: 334.6px;
+      width: 300px;
 
       @media (min-width: 768px) {
         width: 478px;
         height: 372px;
+        margin-left: 45px;
       }
     }
     .window {
@@ -30,11 +27,15 @@
       position: relative;
       margin-top: -51px;
       height: 51px;
-      width: 334.6px;
+      width: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       @media (min-width: 768px) {
         width: 478px;
         height: 70px;
         margin-top: -70px;
+        margin-left: 45px;
       }
 
       .chefName {
@@ -46,9 +47,6 @@
         justify-content: center;
         @media (min-width: 768px) {
           font-size: 40px;
-          margin-top: 0px;
-          align-items: center;
-          margin-top: 12px;
         }
       }
     }
@@ -64,9 +62,9 @@
         font-size: 24px;
         line-height: 35px;
         position: relative;
-        margin-left: 530px;
+        margin-left: 560px;
         margin-top: -370px;
-        margin-bottom: 250px;
+        margin-bottom: 100px;
         margin-right: 40px;
       }
     }
@@ -77,6 +75,7 @@
       font-size: 30px;
       letter-spacing: 1.25px;
       line-height: 35px;
+      margin-left: 45px;
       @media (max-width: 768px) {
         display: none;
       }

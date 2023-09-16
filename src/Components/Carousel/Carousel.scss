@@ -4,6 +4,11 @@
 .CarouselContainer {
   margin-top: 40px;
   margin-left: 20px;
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  margin-right: 70px;  }
 
   .label {
     font-family: Helvetica, sans-serif;
@@ -18,19 +23,17 @@
     }
   }
 
+  .cardContainer {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    width: 80%;
+    margin-left: 13vw;
 
-.cardContainer{
-display: flex;
-align-items: center;
-gap:24px;
-width:900px;
-margin-left: 13vw;
-
-  @media (max-width: 768px) {
-    display: none;
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
-
-}
 
   .carousel {
     width: 100%;

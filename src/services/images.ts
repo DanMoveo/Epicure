@@ -27,7 +27,12 @@ import spicyBig from "../Images/OurIcons/spicyBig.png";
 import veganBig from "../Images/OurIcons/veganBig.png";
 import vegetarianBig from "../Images/OurIcons/vegetarianBig.png";
 import yossi from "../Images/yossi.png";
-
+import appStore from "../Images/AboutUs/appStore.png";
+import epicure_logo from "../Images/AboutUs/epicure_logo.png";
+import googlePlay from "../Images/AboutUs/googlePlay.png";
+import starFull from "../Images/starFull.png";
+import starEmpty from "../Images/starEmpty.png";
+import arrowDown from "../Images/arrowDown.png"
 
 
 export {
@@ -57,5 +62,11 @@ export {
   spicyBig,
   veganBig,
   vegetarianBig,
-  yossi
+  yossi,
+  appStore,
+  googlePlay,
+  epicure_logo,
+  starEmpty,
+  starFull,
+  arrowDown,
 };

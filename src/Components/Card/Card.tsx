@@ -10,7 +10,22 @@ interface CardProps {
   chefName?: string;
   price?: string;
   additionalImage?: string[];
+  rating?: number;
 }
+
+const renderStars = (rating: number) => {
+  const stars = [];
+  for (let i = 1; i <= 5; i++) {
+    if (i <= rating) {
+      stars.push(<img key={i} src={imagee.starFull} alt={`Full Star ${i}`} />);
+    } else {
+      stars.push(
+        <img key={i} src={imagee.starEmpty} alt={`Empty Star ${i}`} />
+      );
+    }
+  }
+  return stars;
+};
 
 const Card: React.FC<CardProps> = ({
   image,
@@ -18,12 +33,13 @@ const Card: React.FC<CardProps> = ({
   chefName,
   price,
   additionalImage,
+  rating,
 }) => {
   return (
     <div className="restaurantCard">
       <img src={image} alt="restaurant" className="restaurant-image" />
       <div className="textContainer">
-        <h2 className="restaurant-name">{restaurantName}</h2>
+        <span className="restaurant-name">{restaurantName}</span>
         {additionalImage && (
           <div className="additionalImages">
             {additionalImage.map((imageUrl, index) => (
@@ -34,11 +50,19 @@ const Card: React.FC<CardProps> = ({
 
         <span className="chef-name">{chefName}</span>
         {price && (
-          <div className="price-container">
+          <div className="priceContainerMobile">
             <span className="price">₪{price}</span>
             <img src={imagee.line} alt="line" className="line" />
           </div>
         )}
+        {price && (
+          <div className="priceContainerDesktop">
+                        <img src={imagee.line} alt="line" className="line" />
+            <span className="price">₪{price}</span>
+            <img src={imagee.line} alt="line" className="line" />
+          </div>
+        )}
+        {rating && <div className="rating">{renderStars(rating)}</div>}
       </div>
     </div>
   );

@@ -5,10 +5,8 @@
   flex-direction: column;
   padding-right: 0;
   @media (min-width: 768px) {
-    gap:24px;
+    gap: 24px;
     align-items: center;
-
-
   }
 
   .restaurant-image {
@@ -20,11 +18,10 @@
   .textContainer {
     display: flex;
     flex-direction: column;
-    margin-left: 20px;
     gap: 10px;
     align-items: center;
-
-
+    justify-content: center;
+    margin-bottom: 20px;
 
     .restaurant-name {
       font-weight: 400;
@@ -32,9 +29,13 @@
       line-height: 21px;
       letter-spacing: 2.67px;
       color: black;
+      @media (max-width: 768px) {
+      margin-top: 20px;
+      }
       @media (min-width: 768px) {
-        font-size: 40x;
+        font-size: 40px !important;
         line-height: 47px;
+        text-align: center;
       }
     }
 
@@ -48,21 +49,45 @@
       color: black;
     }
 
-    .price-container {
+    .priceContainerMobile {
       display: flex;
       flex-direction: row;
       align-items: center;
       margin-bottom: 10px;
+      @media (min-width: 768px) {
+        display: none;
+      }
 
       .line {
         width: 240px;
         margin-left: 14px;
       }
     }
-    .additionalImages{
+
+    .priceContainerDesktop {
       display: flex;
       flex-direction: row;
-   }
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 10px;
+      @media (max-width: 768px) {
+        display: none;
+      }
+
+      .line {
+        width: 90px;
+      }
+    }
+
+    .additionalImages {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .rating{
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
   }
-  
 }
