@@ -32,7 +32,9 @@ import epicure_logo from "../Images/AboutUs/epicure_logo.png";
 import googlePlay from "../Images/AboutUs/googlePlay.png";
 import starFull from "../Images/starFull.png";
 import starEmpty from "../Images/starEmpty.png";
-import arrowDown from "../Images/arrowDown.png"
+import arrowDown from "../Images/arrowDown.png";
+import mapView from "../Images/mapView.png";
+import claroBig from "../Images/ResturantImages/claroBig.png"
 
 
 export {
@@ -69,4 +71,6 @@ export {
   starEmpty,
   starFull,
   arrowDown,
+  mapView,
+  claroBig,
 };

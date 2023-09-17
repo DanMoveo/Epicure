@@ -26,7 +26,7 @@ const restaurants = [
 
 const ChefOfTheWeek: React.FC = () => {
   return (
-    <div className="container">
+    <>
       <span className="title">CHEF OF THE WEEK:</span>
       <div className="chefOfTheWeekContainer">
           <img
@@ -49,7 +49,7 @@ const ChefOfTheWeek: React.FC = () => {
           />
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

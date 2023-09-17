@@ -16,7 +16,7 @@ const RestaurantPage: React.FC = () => {
     {
       id: "claro",
       chefName: "Ran Shmueli",
-      image: image.claro,
+      image: image.claroBig,
       dishes: [
         {
           image: image.pad_ki_mao,
@@ -52,6 +52,27 @@ const RestaurantPage: React.FC = () => {
           description: "sss",
           price: "20",
           category: "Lunch",
+        },
+        {
+          image: image.ta_ma_la_ko,
+          name: "Ta Ma La Ko",
+          description: "Green, Papaya, Mango,Chukka",
+          price: "88",
+          category: "Brakefast",
+        },
+        {
+          image: image.ta_ma_la_ko,
+          name: "Ta Ma La Ko",
+          description: "Green, Papaya, Mango,Chukka",
+          price: "88",
+          category: "Brakefast",
+        },
+        {
+          image: image.ta_ma_la_ko,
+          name: "Ta Ma La Ko",
+          description: "Green, Papaya, Mango,Chukka",
+          price: "88",
+          category: "Brakefast",
         },
       ],
     },
@@ -98,7 +119,7 @@ const RestaurantPage: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="container">
       <img
         src={selectedRestaurant.image}
         alt="restaurantImage"

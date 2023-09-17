@@ -71,6 +71,7 @@ const ResturantsPage: React.FC = () => {
   const initialActiveTab = type ? tabs.indexOf(type) : 0;
   const [activeTab, setActiveTab] = useState(initialActiveTab);
   const navigate = useNavigate();
+  const [mapViewActive, setMapViewActive] = useState(false);
 
   function formatChefName(chefName: string): string {
     const formattedName = chefName.replace(/ /g, "-");
@@ -81,6 +82,7 @@ const ResturantsPage: React.FC = () => {
   const handleTabClick = (index: number) => {
     setActiveTab(index);
     navigate(`/restaurants/${formatChefName(tabs[index])}`);
+    setMapViewActive(false);
   };
 
   const filterRestaurants = () => {
@@ -102,12 +104,18 @@ const ResturantsPage: React.FC = () => {
     });
   };
 
+  const handleMapViewClick = () => {
+    setMapViewActive(true);
+    setActiveTab(-1);
+    navigate(`/restaurants/mapView`);
+  };
   const filteredRestaurants = filterRestaurants();
 
   return (
     <div className="container">
       <h2 className="title">RESTAURANTS</h2>
       <div className="tabsContainer">
+        
         <ul className="tabList">
           {tabs.map((tab, index) => (
             <li
@@ -118,24 +126,31 @@ const ResturantsPage: React.FC = () => {
               {tab}
             </li>
           ))}
-          <span className="tabItemDesktop">Map View</span>
+          <span className={`tabItemDesktop ${mapViewActive ? "active" : ""}`} onClick={handleMapViewClick}>
+            Map View
+          </span>
         </ul>
 
         <div className="filtersContainer">
           <div className="filter">
-          <span className="filterText">Price Range</span>
-          <img src={ image.arrowDown} alt="arrow down"/>
-          </div>
-          <div className="filter">
-          <span className="filterText">Distance</span>
-          <img src={image.arrowDown} alt="arrow down" />
-          </div>
-          <div className="filter">
-          <span className="filterText">Rating</span>
+            <span className="filterText">Price Range</span>
             <img src={image.arrowDown} alt="arrow down" />
-            </div>
-
+          </div>
+          <div className="filter">
+            <span className="filterText">Distance</span>
+            <img src={image.arrowDown} alt="arrow down" />
+          </div>
+          <div className="filter">
+            <span className="filterText">Rating</span>
+            <img src={image.arrowDown} alt="arrow down" />
+          </div>
         </div>
+
+        {mapViewActive && (
+          <div className="mapImageContainer">
+            <img src={image.mapView} alt="Map View" />
+          </div>
+        )}
 
         <div className="listContainer">
           {filteredRestaurants.map((restaurant, index) => (

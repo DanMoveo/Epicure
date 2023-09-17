@@ -10,20 +10,29 @@ const Actions: React.FC = () => {
   const [isBagWindowOpen, setIsBagWindowOpen] = useState(false);
 
   const openSearchWindow = () => {
-    setIsSearchWindowOpen(!isSearchWindowOpen);
-    setIsBagWindowOpen(false);
-    console.log("search open");
+    setIsSearchWindowOpen(true);
+  };
+
+  const closeSearchWindow = () => {
+    setIsSearchWindowOpen(false);
   };
 
   const openBagWindow = () => {
-    setIsBagWindowOpen(!isBagWindowOpen);
-    setIsSearchWindowOpen(false);
+    setIsBagWindowOpen(true);
+  };
+  const closeBagWindow = () => {
+    setIsBagWindowOpen(false);
   };
 
   return (
     <div className="actions">
-      <img src={Images.search} alt="search" onClick={openSearchWindow} />
-      {isSearchWindowOpen && <SearchWindow closeWindow={openSearchWindow} />}
+      <img
+        src={Images.search}
+        alt="search"
+        className="searchIcon"
+        onClick={openSearchWindow}
+      />
+      {isSearchWindowOpen && <SearchWindow closeWindow={closeSearchWindow} />}
       <img src={Images.user} alt="user" className="icon" />
       <img
         src={Images.bag}
@@ -31,7 +40,7 @@ const Actions: React.FC = () => {
         onClick={openBagWindow}
         className="icon"
       />
-      {isBagWindowOpen && <BagWindow closeWindow={openBagWindow} />}
+      {isBagWindowOpen && <BagWindow closeWindow={closeBagWindow} />}
     </div>
   );
 };

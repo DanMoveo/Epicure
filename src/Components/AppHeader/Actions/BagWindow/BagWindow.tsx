@@ -1,6 +1,6 @@
 // BagWindow.tsx
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./BagWindow.scss";
 import * as Images from "../../../../Services/Images";
 
@@ -9,8 +9,30 @@ interface Props {
 }
 
 const BagWindow: React.FC<Props> = ({ closeWindow }) => {
+  const popupRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleDocumentClick = (event: MouseEvent) => {
+      if (!event.target) return;
+
+      if (
+        popupRef.current &&
+        !popupRef.current.contains(event.target as Node) &&
+        !(event.target as HTMLElement).closest(".icon")
+      ) {
+        closeWindow();
+      }
+    };
+
+    document.addEventListener("click", handleDocumentClick);
+
+    return () => {
+      document.removeEventListener("click", handleDocumentClick);
+    };
+  }, [closeWindow]);
+
   return (
-    <div className="bag_window">
+    <div ref={popupRef} className="bag_window">
       <img src={Images.x} alt="x" className="icon" onClick={closeWindow} />
       <div className="bagContainer">
         <img src={Images.big_bag} alt="bag" className="bag_icon" />

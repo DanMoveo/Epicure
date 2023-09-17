@@ -38,8 +38,6 @@
 
       &.active {
         font-weight: 400;
-        background-color: #fff;
-        border-bottom: 2px solid #de9200e5;
         @media (min-width: 768px) {
           border-bottom: 2px solid #fff;
         }
@@ -50,6 +48,13 @@
       cursor: pointer;
       padding: 7px 7px;
       transition: background-color 0.3s ease;
+
+      &.active {
+        font-weight: 400;
+        @media (min-width: 768px) {
+          border-bottom: 2px solid #fff;
+        }
+      }
       @media (max-width: 768px) {
         display: none;
       }
@@ -80,6 +85,14 @@
           line-height: 21.76px;
           letter-spacing: 1.92px;
         }
+      }
+    }
+
+    .mapImageContainer {
+      margin-top: 30px;
+      margin-bottom: -90px;
+      @media (max-width: 768px) {
+        display: none;
       }
     }
 

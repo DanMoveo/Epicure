@@ -10,9 +10,9 @@ const AboutUsDesktop: React.FC = () => {
   return (
     <div className="aboutUsDesktopContainer">
       <div className="textContainer">
-        <h2 className="title">ABOUT US:</h2>
-        <p className="text">{text.aboutUs1}</p>
-        <p className="text">{text.aboutus2}</p>
+        <h2 className="titleAboutUs">ABOUT US:</h2>
+        <p className="textAboutUs">{text.aboutUs1}</p>
+        <p className="textAboutUs">{text.aboutus2}</p>
 
         <div className="iconContainer">
           <img src={image.appStore} alt="icon" className="icon"></img>

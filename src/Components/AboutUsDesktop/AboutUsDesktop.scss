@@ -2,6 +2,7 @@
   display: flex;
   background-color: #fafafa;
   padding: 60px;
+  margin-top: 50px;
   @media (max-width: 768px) {
     display: none;
   }
@@ -12,8 +13,9 @@
     gap: 24px;
     width: 917px;
     height: 449px;
+    align-items: flex-start;
 
-    .title {
+    .titleAboutUs {
       font-family: Helvetica, sans-serif;
       font-weight: 200;
       font-size: 30px;
@@ -21,14 +23,16 @@
       letter-spacing: 2.14px;
     }
 
-    .text {
+    .textAboutUs {
       width: 569px;
       margin-top: -18px;
+      margin-left: 20px;
       font-family: Helvetica, sans-serif;
       font-weight: 200;
       font-size: 20px;
       line-height: 30px;
       letter-spacing: 2.14px;
+      margin-left: 0;
     }
     .iconContainer {
       display: flex;
