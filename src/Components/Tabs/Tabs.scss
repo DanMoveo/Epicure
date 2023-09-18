@@ -1,0 +1,27 @@
+// Tabs.scss
+
+@import "../../Services/variables.scss";
+
+.tabList {
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  font-family: $font-family;
+  font-weight: 200;
+  font-size: 18px;
+  letter-spacing: 1.92px;
+  margin-bottom: 20px;
+
+  .tabItem {
+    cursor: pointer;
+    padding: 7px 7px;
+    transition: background-color 0.3s ease;
+
+    &.active {
+      background-color: #fff;
+      border-bottom: $borderBottomOrange;
+      font-weight: 400;
+    }
+  }
+}

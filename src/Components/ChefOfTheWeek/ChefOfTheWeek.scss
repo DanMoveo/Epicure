@@ -1,3 +1,5 @@
+@import "../../Services/variables.scss";
+
 .title {
   font-family: Helvetica, sans-serif;
   font-weight: 200;
@@ -49,7 +51,7 @@
     }
 
     .chefName {
-      font-family: Helvetica, sans-serif;
+      font-family: $font-family;
       font-weight: 400;
       font-size: 18px;
       letter-spacing: 2.67px;
@@ -62,7 +64,7 @@
   }
 
   .text {
-    font-family: Helvetica, sans-serif;
+    font-family: $font-family;
     font-weight: 200;
     font-size: 16px;
     letter-spacing: 1.25px;
@@ -71,18 +73,19 @@
     margin-right: 37px;
 
     @media (min-width: 768px) {
+      max-height: 300px;
       font-size: 24px;
       line-height: 35px;
       position: relative;
       margin-left: 600px;
-      margin-top: -320px;
+      margin-top: -280px;
       margin-bottom: 160px;
       margin-right: 80px;
     }
   }
 
   .chefRestaurants {
-    font-family: Helvetica, sans-serif;
+    font-family: $font-family;
     font-weight: 200;
     font-size: 30px;
     letter-spacing: 1.25px;

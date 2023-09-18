@@ -1,3 +1,5 @@
+@import "../../Services/variables.scss";
+
 .aboutUsDesktopContainer {
   display: flex;
   background-color: #fafafa;
@@ -16,7 +18,7 @@
     align-items: flex-start;
 
     .titleAboutUs {
-      font-family: Helvetica, sans-serif;
+      font-family:$font-family;
       font-weight: 200;
       font-size: 30px;
       line-height: 35px;
@@ -27,7 +29,7 @@
       width: 569px;
       margin-top: -18px;
       margin-left: 20px;
-      font-family: Helvetica, sans-serif;
+      font-family:$font-family;
       font-weight: 200;
       font-size: 20px;
       line-height: 30px;

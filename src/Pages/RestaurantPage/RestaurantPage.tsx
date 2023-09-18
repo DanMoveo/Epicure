@@ -5,6 +5,7 @@ import * as image from "../../Services/Images";
 import Card from "../../Components/Card/Card";
 import "./RestaurantPage.scss";
 import { useNavigate, useParams } from "react-router-dom";
+import Tabs from "../../Components/Tabs/Tabs";
 
 const RestaurantPage: React.FC = () => {
   const tabs = ["Brakefast", "Lunch", "Dinner"];
@@ -134,18 +135,7 @@ const RestaurantPage: React.FC = () => {
         </div>
       </div>
 
-      <ul className="tab-list">
-        {tabs.map((tab, index) => (
-          <li
-            key={index}
-            className={`tab-item ${index === activeTab ? "active" : ""}`}
-            onClick={() => handleTabClick(index)}
-          >
-            {tabs[index]}
-          </li>
-        ))}
-      </ul>
-
+      <Tabs tabs={tabs} activeTab={activeTab} onTabClick={handleTabClick} />
       <ul className="listContainer">
         {selectedRestaurant.dishes.map((dish, index) => (
           <li key={index}>

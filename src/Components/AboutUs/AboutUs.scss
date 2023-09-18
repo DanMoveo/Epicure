@@ -1,36 +1,36 @@
+@import "../../Services/variables.scss";
+
 .aboutUsContainer {
-    display: flex;
-    background-color: #fafafa;
-    flex-direction: column;
-    padding: 25px;
-    gap:25px;
-    @media (min-width: 768px) {
-display: none;
-    }
-  
-    .logo {
-      width: 100px;
-    }
-  
-    .icon {
-      width: 150px;
-    }
-  
-    .title{
-      font-family: Helvetica, sans-serif;
-      font-weight: 200;
-      font-size: 18px;
-      letter-spacing: 1.25px;
-    }
-  
-    .text{
-      margin-top: -18px;
-      font-family: Helvetica, sans-serif;
-      font-weight: 200;
-      font-size: 18px;
-      line-height: 28px;
-      letter-spacing: 2.14px;
-  
-    }
+  display: flex;
+  background-color: #fafafa;
+  flex-direction: column;
+  padding: 25px;
+  gap: 25px;
+  @media (min-width: 768px) {
+    display: none;
   }
-  
+
+  .logo {
+    width: 100px;
+  }
+
+  .icon {
+    width: 150px;
+  }
+
+  .title {
+    font-family:$font-family;
+    font-weight: 200;
+    font-size: 18px;
+    letter-spacing: 1.25px;
+  }
+
+  .text {
+    margin-top: -18px;
+    font-family: $font-family;
+    font-weight: 200;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 2.14px;
+  }
+}

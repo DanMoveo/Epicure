@@ -1,10 +1,12 @@
 /* ResturantsPage.scss */
+@import "../../Services/global-styles.scss";
+@import "../../Services/variables.scss";
 
 .container {
   padding: 20px;
 
   .title {
-    font-family: Helvetica, sans-serif;
+    font-family: $font-family;
     font-weight: 200;
     font-size: 18px;
     line-height: 28px;
@@ -20,7 +22,7 @@
       display: flex;
       padding: 0;
       margin: 0;
-      font-family: Helvetica, sans-serif;
+      font-family: $font-family;
       font-weight: 200;
       font-size: 18px;
       letter-spacing: 1px;
@@ -61,29 +63,90 @@
     }
 
     .filtersContainer {
+      position: relative; 
       display: flex;
-      flex-direction: row;
       align-items: center;
       justify-content: center;
       gap: 60px;
-      background-color: #fafafa;
       padding: 15px;
       margin-top: 30px;
       @media (max-width: 768px) {
         display: none;
       }
 
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+      background-color: #fafafa;
+        width: 104.7vw;
+        margin-left: -37vw;
+        z-index: -1;
+      }
+
       .filter {
         display: flex;
         align-items: center;
         gap: 5px;
+        @extend .icon;
 
         .filterText {
-          font-family: Helvetica, sans-serif;
+          font-family: $font-family;
           font-weight: 200;
           font-size: 18px;
           line-height: 21.76px;
           letter-spacing: 1.92px;
+        }
+      }
+    }
+
+    .slideContainer {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      width: 353px;
+      height: 162px;
+      margin-left: 50vh;
+      background-color: white;
+      box-shadow: 2px 4px 10px 0px #00000040;
+      @media (max-width: 768px) {
+        display: none;
+      }
+
+      .slideTitle {
+        font-family: $font-family;
+        font-weight: 400;
+        font-size: 18px;
+        letter-spacing: 1.92px;
+      }
+
+      .slideRange {
+        font-family: $font-family;
+        font-weight: 200;
+        font-size: 14px;
+        letter-spacing: 1.97px;
+      }
+    }
+
+    .distanceSlide {
+      margin-left: 80vh;
+    }
+
+    .rateWindow {
+      width: 353px;
+      height: 368px;
+      margin-left: 105vh;
+      .rateWindowRow {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        .checkbox {
+          width: 18px;
+          height: 18px;
+          margin-right: 25px;
         }
       }
     }

@@ -1,4 +1,5 @@
 @import "../../services/global-styles.scss";
+@import "../../Services/variables.scss";
 
 .iconsContainer {
   display: flex;
@@ -7,10 +8,11 @@
   align-items: center;
   @media (min-width: 768px) {
     margin-top: 30px;
-    margin-bottom: 30px;  }
+    margin-bottom: 30px;
+  }
 
   .title {
-    font-family: Helvetica, sans-serif;
+    font-family: $font-family;
     font-weight: 200;
     font-size: 18px;
     letter-spacing: 1.25px;
@@ -71,7 +73,7 @@
       }
 
       .label {
-        font-family: Helvetica, sans-serif;
+        font-family: $font-family;
         font-weight: 200;
         font-size: 18px;
         letter-spacing: 1.97px;

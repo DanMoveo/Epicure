@@ -1,3 +1,5 @@
+@import "../../Services/variables.scss";
+
 .restaurantCard {
   width: 100%;
   background-color: #f9f4ea;
@@ -30,7 +32,7 @@
       letter-spacing: 2.67px;
       color: black;
       @media (max-width: 768px) {
-      margin-top: 20px;
+        margin-top: 20px;
       }
       @media (min-width: 768px) {
         font-size: 40px !important;
@@ -40,7 +42,7 @@
     }
 
     .chef-name {
-      font-family: Helvetica, sans-serif;
+      font-family: $font-family;
       font-weight: 200;
       font-size: 16px;
       line-height: 20px;
@@ -84,7 +86,7 @@
       flex-direction: row;
     }
 
-    .rating{
+    .rating {
       @media (max-width: 768px) {
         display: none;
       }

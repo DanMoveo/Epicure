@@ -1,0 +1,26 @@
+.rangeSlider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #f9f4ea;
+  width: 309px;
+  height: 56px;
+  border-radius: 8px;
+}
+.rc-slider {
+  width: 272px;
+  margin-left: 18.5px;
+
+  .rc-slider-handle {
+    margin-top: -10px;
+    background-color: black;
+    border-color: black;
+    height: 23px;
+    width: 23px;
+    
+  }
+  .rc-slider-track {
+    display: flex;
+    background-color: #97979780;
+  }
+}
