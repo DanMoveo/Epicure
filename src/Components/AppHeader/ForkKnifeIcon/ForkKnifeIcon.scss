@@ -2,8 +2,7 @@
 @import "../../../Services/variables.scss";
 
 .epicureLogoContainer {
-  display: flex;
-  align-items: center;
+  @include centerElement;
   .iconFork {
     @extend .icon;
     @media (max-width: 768px) {

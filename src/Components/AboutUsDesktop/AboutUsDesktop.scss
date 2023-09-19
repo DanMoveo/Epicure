@@ -1,4 +1,5 @@
 @import "../../Services/variables.scss";
+@import "../../Services/global-styles.scss";
 
 .aboutUsDesktopContainer {
   display: flex;
@@ -45,8 +46,7 @@
     }
   }
   .logoContainer {
-    display: flex;
-    align-items: center;
+    @include centerElement;
 
     .logo {
       width: 178px;

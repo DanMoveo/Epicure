@@ -1,7 +1,10 @@
+// RangeSlider.scss
+
+@import "../../Services/global-styles.scss";
+
 .rangeSlider {
-  display: flex;
+@include centerElement;
   flex-direction: column;
-  justify-content: center;
   background-color: #f9f4ea;
   width: 309px;
   height: 56px;

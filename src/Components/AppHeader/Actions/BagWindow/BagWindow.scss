@@ -13,7 +13,7 @@
   @media (min-width: 768px) {
     width: 497px;
     height: 586px;
-    margin-top: 46px;
+    margin-top: 70px;
   }
 
   .icon {
@@ -23,14 +23,12 @@
   }
 
   .bagContainer {
-    display: flex;
+    @include centerElement;
     flex-direction: column;
-    align-items: center;
     margin-top: 20px;
     margin-right: 47px;
     @media (min-width: 768px) {
       margin-top: 170px;
-
     }
 
     .bag_icon {
@@ -42,7 +40,7 @@
     .text_bag_window {
       text-align: center;
       width: 50%;
-      font-family: "Helvetica Neue", sans-serif;
+      font-family: $font-family;
       font-size: 24px;
       font-weight: 200;
       letter-spacing: 1.3px;

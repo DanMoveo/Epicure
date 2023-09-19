@@ -18,13 +18,11 @@ icon {
   }
 
   .hero_window {
-    display: flex;
+    @include centerElement;
     position: relative;
     margin-top: -210px;
     margin-bottom: 100px;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 180px;
     height: 60px;
     left: 50%;
@@ -48,16 +46,14 @@ icon {
       margin-right: 10px;
 
       .text {
-        font-family: "Helvetica Neue", sans-serif;
+        font-family: $font-family;
         font-size: 26px;
         font-weight: 200;
         line-height: 1.2;
         letter-spacing: 1px;
       }
       .input-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include centerElement;
         border: 1px black solid;
         height: 35px;
         @media (min-width: 768px) {

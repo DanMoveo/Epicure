@@ -6,6 +6,7 @@ import * as Images from "../../../Services/Images";
 import { NavLink } from "react-router-dom";
 
 const ForkKnifeIcon: React.FC = () => {
+  
   return (
     <NavLink to="/" style={{ textDecoration: "none" }}>
       <div className="epicureLogoContainer">

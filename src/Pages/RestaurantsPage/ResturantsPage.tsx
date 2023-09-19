@@ -142,7 +142,6 @@ const ResturantsPage: React.FC = () => {
   };
   const filteredRestaurants = filterRestaurants();
 
-
   // const [selectedRatings, setSelectedRatings] = useState<number[]>([]);
 
   // const handleRatingCheckboxClick = (rating: number) => {
@@ -175,7 +174,6 @@ const ResturantsPage: React.FC = () => {
   //   });
   // };
 
-
   return (
     <div className="container">
       <h2 className="title">RESTAURANTS</h2>
@@ -206,7 +204,6 @@ const ResturantsPage: React.FC = () => {
             <img src={image.arrowDown} alt="arrow down" />
           </button>
         </div>
-
         {priceSlide && (
           <div className="slideContainer">
             <span className="slideTitle">Price Range Selected</span>

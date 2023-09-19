@@ -14,9 +14,7 @@ icon {
   height: 50%;
   background-color: white;
   z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@include centerElement;
 
   .icon_x {
     @extend .icon;
@@ -34,7 +32,7 @@ icon {
     border: none;
     outline: none;
     text-align: left;
-    font-family: "Helvetica Neue", sans-serif;
+    font-family: $font-family;
     font-size: 26px;
     font-weight: 200;
     background: none;

@@ -80,7 +80,7 @@ const RestaurantPage: React.FC = () => {
     {
       id: "kab-kem",
       chefName: "Yariv Malili",
-      image: image.claro,
+      image: image.claroBig,
       dishes: [
         {
           image: image.pad_ki_mao,

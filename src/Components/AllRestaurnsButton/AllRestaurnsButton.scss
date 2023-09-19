@@ -2,8 +2,7 @@
 @import "../../Services/variables.scss";
 
 .button {
-  display: flex;
-  align-items: center;
+  @include centerElement;
   @extend .icon;
   margin-top: 8px;
   margin-left: 7vw;

@@ -1,6 +1,8 @@
+// Actions.scss
+@import "../../../Services/global-styles.scss";
+
 .actions {
-  display: flex;
-  align-items: center;
+  @include centerElement;
   gap: 14px;
   flex-shrink: 0;
   max-width: 60%;

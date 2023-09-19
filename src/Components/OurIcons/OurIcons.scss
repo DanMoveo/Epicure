@@ -2,10 +2,9 @@
 @import "../../Services/variables.scss";
 
 .iconsContainer {
-  display: flex;
+  @include centerElement;
   flex-direction: column;
   background-color: #fafafa;
-  align-items: center;
   @media (min-width: 768px) {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -23,10 +22,8 @@
   }
 
   .ourIconContainer {
-    display: flex;
+    @include centerElement;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     @media (min-width: 768px) {
       flex-direction: row;
     }

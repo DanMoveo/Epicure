@@ -7,11 +7,12 @@
   @extend .icon;
 
   @media (min-width: 768px) {
-    display: none; // Hide the Stripes on screens wider than 768px (adjust as needed)
+    display: none; 
   }
 }
 
 .stripes_window {
+  padding-left: 10px;
   position: fixed;
   flex-direction: column;
   top: 0;
@@ -20,9 +21,6 @@
   height: 60%;
   background-color: white;
   z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   .icon_x {
     @extend .icon;
@@ -40,7 +38,7 @@
     border: none;
     outline: none;
     text-align: left;
-    font-family: "Helvetica Neue", sans-serif;
+    font-family: $font-family;
     font-size: 26px;
     font-weight: 200;
     background: none;

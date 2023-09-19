@@ -1,27 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import "./TextButtons.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 const TextButtons: React.FC = () => {
-  const [activeTab, setActiveTab] = useState("restaurants");
-
-  const handleTabChange = (tabName: string) => {
-    setActiveTab(tabName);
-  };
+  const location = useLocation();
 
   return (
     <div className="textButtonsContainer">
       <NavLink
         to="/restaurants/All"
-        className={activeTab === "restaurants" ? "textButton active" : "textButton"}
-        onClick={() => handleTabChange("restaurants")}
+        className={`textButton ${
+          location.pathname.includes("/restaurants") ? "active" : ""
+        }`}
       >
         Restaurants
       </NavLink>
       <NavLink
         to="/chefs"
-        className={activeTab === "chefs" ? "textButton active" : "textButton"}
-        onClick={() => handleTabChange("chefs")}
+        className={`textButton ${
+          location.pathname.includes("/chefs") ? "active" : ""
+        }`}
       >
         Chefs
       </NavLink>

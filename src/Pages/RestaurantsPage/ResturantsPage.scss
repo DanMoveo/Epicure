@@ -63,25 +63,16 @@
     }
 
     .filtersContainer {
-      position: relative; 
+      width: 97vw;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 60px;
       padding: 15px;
       margin-top: 30px;
+      background-color: #fafafa;
       @media (max-width: 768px) {
         display: none;
-      }
-
-      &::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-      background-color: #fafafa;
-        width: 104.7vw;
-        margin-left: -37vw;
-        z-index: -1;
       }
 
       .filter {
@@ -152,6 +143,8 @@
     }
 
     .mapImageContainer {
+      display: flex;
+      justify-content: center;
       margin-top: 30px;
       margin-bottom: -90px;
       @media (max-width: 768px) {
