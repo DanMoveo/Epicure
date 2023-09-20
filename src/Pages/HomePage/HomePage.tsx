@@ -4,10 +4,7 @@ import React from "react";
 import TableImage from "../../Components/TableImage/TableImage";
 import Carousel from "../../Components/Carousel/Carousel";
 import "./HomePage.scss";
-import resturant from "../../Images/ResturantImages/claro.png";
-import vegan from "../../Images/OurIcons/vegan.png";
-import spicy from "../../Images/OurIcons/spicy.png";
-import vegetarian from "../../Images/OurIcons/vegetarian.png";
+import * as image from "../../Services/Images";
 import OurIcons from "../../Components/OurIcons/OurIcons";
 import ChefOfTheWeek from "../../Components/ChefOfTheWeek/ChefOfTheWeek";
 import AboutUs from "../../Components/AboutUs/AboutUs";
@@ -19,22 +16,22 @@ const popularRestaurantSlides = [
   {
     id: 1,
     title: "Claro",
-    descriptionORchef: "Ran Shamir",
-    dishImage: resturant,
+    chefName: "Ran Shamir",
+    dishImage: image.claro,
     rating: 3,
   },
   {
     id: 2,
     title: "Lumia",
-    descriptionORchef: "Meir Adonie",
-    dishImage: resturant,
+    chefName: "Meir Adonie",
+    dishImage: image.claro,
     rating: 2,
   },
   {
     id: 3,
     title: "Claro",
-    descriptionORchef: "Ran Shamir",
-    dishImage: resturant,
+    chefName: "Ran Shamir",
+    dishImage: image.claro,
     rating: 1,
   },
 ];
@@ -43,29 +40,29 @@ const signatureDish = [
   {
     id: 1,
     title: "Pad Ki Mao",
-    descriptionORchef:
+    description:
       "Shrimps, Glass Noodles, Kemiri Nuts, Shallots, Lemon Grass, Magic Chili Brown Coconut",
-    dishImage: resturant,
+    dishImage: image.claro,
     price: "88",
-    additionalImage: [vegan, spicy],
+    additionalImage: [image.vegan, image.spicy],
   },
   {
     id: 2,
     title: "Garbar",
-    descriptionORchef:
+    description:
       "Shrimps, Glass Noodles, Kemiri Nuts, Shallots, Lemon Grass, Magic Chili Brown Coconut",
-    dishImage: resturant,
+    dishImage: image.claro,
     price: "78",
-    additionalImage: [vegetarian],
+    additionalImage: [image.vegetarian],
   },
   {
     id: 3,
     title: "Beach Sunset",
-    descriptionORchef:
+    description:
       "Shrimps, Glass Noodles, Kemiri Nuts, Shallots, Lemon Grass, Magic Chili Brown Coconut",
-    dishImage: resturant,
+    dishImage: image.claro,
     price: "88",
-    additionalImage: [spicy],
+    additionalImage: [image.spicy],
   },
 ];
 
@@ -73,17 +70,17 @@ const yossiRestaurantSlides = [
   {
     id: 1,
     title: "Onza",
-    dishImage: resturant,
+    dishImage: image.claro,
   },
   {
     id: 2,
     title: "Kitchen",
-    dishImage: resturant,
+    dishImage: image.claro,
   },
   {
     id: 3,
     title: "Beach Sunset",
-    dishImage: resturant,
+    dishImage: image.claro,
   },
 ];
 

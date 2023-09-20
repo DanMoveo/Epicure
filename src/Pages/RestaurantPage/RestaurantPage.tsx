@@ -160,23 +160,12 @@ const RestaurantPage: React.FC = () => {
                   key={index}
                   image={dish.image}
                   restaurantName={dish.name}
-                  chefName={dish.description}
+                  description={dish.description}
                   price={dish.price}
                 />
               )}
             </>
           );
-          // <div key={index}>
-          //   {tabs[activeTab] === dish.category && (
-          //     <Card
-          //       key={index}
-          //       image={dish.image}
-          //       restaurantName={dish.name}
-          //       chefName={dish.description}
-          //       price={dish.price}
-          //     />
-          //   )}
-          // </div>
         })}
       </div>
     </div>

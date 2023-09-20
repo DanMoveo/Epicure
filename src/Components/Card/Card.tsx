@@ -8,6 +8,7 @@ interface CardProps {
   image: string;
   restaurantName: string;
   chefName?: string;
+  description?: string;
   price?: string;
   additionalImage?: string[];
   rating?: number;
@@ -34,6 +35,7 @@ const Card: React.FC<CardProps> = ({
   price,
   additionalImage,
   rating,
+  description,
 }) => {
   return (
     <div className="restaurantCard">
@@ -47,8 +49,8 @@ const Card: React.FC<CardProps> = ({
             ))}
           </div>
         )}
-
-        <span className="chef-name">{chefName}</span>
+        <span className="description">{description}</span>
+        <span className="chefName">{chefName}</span>
         {price && (
           <div className="priceContainerMobile">
             <span className="price">₪{price}</span>

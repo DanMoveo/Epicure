@@ -6,14 +6,14 @@ import "swiper/swiper-bundle.css";
 import "./Carousel.scss";
 import Card from "../Card/Card";
 
-
 interface CarouselProps {
   title: string;
   slides: {
     id: number;
     dishImage: string;
     title: string;
-    descriptionORchef?: string;
+    chefName?: string;
+    description?: string;
     price?: string;
     additionalImage?: string[];
     rating?: number;
@@ -32,7 +32,8 @@ const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
                 <img src={slide.dishImage} alt={slide.title} />
                 <div className="text">
                   <h2 className="title">{slide.title}</h2>
-                  <p className="description">{slide.descriptionORchef}</p>
+                  <p className="chefName">{slide.chefName}</p>
+                  <p className="description">{slide.description}</p>
                   {slide.additionalImage && (
                     <div className="additional-Images">
                       {slide.additionalImage.map((imageUrl, index) => (
@@ -55,17 +56,17 @@ const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
 
       <div className="cardContainer">
         {slides.map((restaurant, index) => (
-          
           <Card
-          key={index} 
+            key={index}
             image={slides[index].dishImage}
             restaurantName={slides[index].title}
-            chefName={slides[index].descriptionORchef}
+            chefName={slides[index].chefName}
+            description={slides[index].description}
             price={slides[index].price}
             additionalImage={slides[index].additionalImage}
             rating={slides[index].rating}
-            />
-            ))}
+          />
+        ))}
       </div>
     </div>
   );
