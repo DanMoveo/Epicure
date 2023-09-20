@@ -1,10 +1,10 @@
 // RestaurantPage.scss
 @import "../../Services/variables.scss";
+@import "../../Services/global-styles.scss";
 
 .container {
-  display: flex;
+  @include centerElement;
   flex-direction: column;
-  justify-content: center;
   @media (min-width: 768px) {
     align-items: center;
   }

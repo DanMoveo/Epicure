@@ -10,7 +10,7 @@ const Actions: React.FC = () => {
   const [isBagWindowOpen, setIsBagWindowOpen] = useState(false);
 
   const openSearchWindow = () => {
-    setIsSearchWindowOpen(true);
+    setIsSearchWindowOpen(!isSearchWindowOpen);
   };
 
   const closeSearchWindow = () => {
@@ -18,7 +18,7 @@ const Actions: React.FC = () => {
   };
 
   const openBagWindow = () => {
-    setIsBagWindowOpen(true);
+    setIsBagWindowOpen(!isBagWindowOpen);
   };
   const closeBagWindow = () => {
     setIsBagWindowOpen(false);

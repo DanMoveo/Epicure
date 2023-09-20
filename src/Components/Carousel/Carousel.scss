@@ -9,7 +9,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-right: 70px;
   }
 
   .label {
@@ -28,10 +27,10 @@
   .cardContainer {
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: stretch;
     gap: 24px;
-    width: 80%;
-    margin-left: 13vw;
-
     @media (max-width: 768px) {
       display: none;
     }

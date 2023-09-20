@@ -38,12 +38,14 @@ icon {
     }
 
     .textContainer {
-      display: flex;
+      @include centerElement;
       position: relative;
       flex-direction: column;
-      width: 315px;
       margin-bottom: 25px;
-      margin-right: 10px;
+      width: 337px;
+      @media (min-width: 768px) {
+        width: 350px;
+      }
 
       .text {
         font-family: $font-family;

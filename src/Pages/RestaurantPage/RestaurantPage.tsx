@@ -7,13 +7,28 @@ import "./RestaurantPage.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import Tabs from "../../Components/Tabs/Tabs";
 
-const RestaurantPage: React.FC = () => {
-  const tabs = ["Brakefast", "Lunch", "Dinner"];
-  const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState(0);
-  const { restaurantName } = useParams<{ restaurantName: string }>();
+interface Dish {
+  image: string;
+  name: string;
+  description: string;
+  price: string;
+  category: string;
+}
 
-  const restaurants = [
+interface Restaurant {
+  id: string;
+  chefName: string;
+  image: string;
+  dishes: Dish[];
+}
+
+const RestaurantPage: React.FC = () => {
+  const tabs: string[] = ["Brakefast", "Lunch", "Dinner"];
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState<number>(0); 
+  const { restaurantName } = useParams<{ restaurantName: string }>(); 
+
+  const restaurants: Restaurant[] = [
     {
       id: "claro",
       chefName: "Ran Shmueli",
@@ -116,7 +131,7 @@ const RestaurantPage: React.FC = () => {
   );
 
   if (!selectedRestaurant) {
-    return <div>Restaurant not found</div>;
+    return <div>Dishes not found</div>;
   }
 
   return (
@@ -136,21 +151,34 @@ const RestaurantPage: React.FC = () => {
       </div>
 
       <Tabs tabs={tabs} activeTab={activeTab} onTabClick={handleTabClick} />
-      <ul className="listContainer">
-        {selectedRestaurant.dishes.map((dish, index) => (
-          <li key={index}>
-            {tabs[activeTab] === dish.category && (
-              <Card
-              key={index} 
-                image={dish.image}
-                restaurantName={dish.name}
-                chefName={dish.description}
-                price={dish.price}
-              />
-            )}
-          </li>
-        ))}
-      </ul>
+      <div className="listContainer">
+        {selectedRestaurant.dishes.map((dish, index) => {
+          return (
+            <>
+              {tabs[activeTab] === dish.category && (
+                <Card
+                  key={index}
+                  image={dish.image}
+                  restaurantName={dish.name}
+                  chefName={dish.description}
+                  price={dish.price}
+                />
+              )}
+            </>
+          );
+          // <div key={index}>
+          //   {tabs[activeTab] === dish.category && (
+          //     <Card
+          //       key={index}
+          //       image={dish.image}
+          //       restaurantName={dish.name}
+          //       chefName={dish.description}
+          //       price={dish.price}
+          //     />
+          //   )}
+          // </div>
+        })}
+      </div>
     </div>
   );
 };

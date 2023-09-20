@@ -1,8 +1,9 @@
 // SearchWindow.tsx
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import "./SearchWindow.scss";
 import * as Images from "../../../../Services/Images";
+import { useClickOutsideHandler } from "../../../../Hooks/useClickOutsideHandler";
 
 interface Props {
   closeWindow: () => void;
@@ -11,25 +12,9 @@ interface Props {
 const SearchWindow: React.FC<Props> = ({ closeWindow }) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const handleDocumentClick = (event: MouseEvent) => {
-      if (!event.target) return;
-
-      if (
-        popupRef.current &&
-        !popupRef.current.contains(event.target as Node) &&
-        !(event.target as HTMLElement).closest(".searchIcon")
-      ) {
-        closeWindow();
-      }
-    };
-
-    document.addEventListener("click", handleDocumentClick);
-
-    return () => {
-      document.removeEventListener("click", handleDocumentClick);
-    };
-  }, [closeWindow]);
+  useClickOutsideHandler(popupRef, () => {
+    closeWindow();
+  });
 
   return (
     <div ref={popupRef} className="search_window">

@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import "./StripesWindow.scss";
 import * as Images from "../../../../Services/Images";
 import { NavLink } from "react-router-dom";
+import { useClickOutsideHandler } from "../../../../Hooks/useClickOutsideHandler";
 
 interface Props {
   closeModal: () => void;
@@ -9,26 +10,9 @@ interface Props {
 
 const StripesWindow: React.FC<Props> = ({ closeModal }) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const handleDocumentClick = (event: MouseEvent) => {
-      if (!event.target) return;
-
-      if (
-        popupRef.current &&
-        !popupRef.current.contains(event.target as Node) &&
-        !(event.target as HTMLElement).closest(".stripesIcon")
-      ) {
-        closeModal(); 
-      }
-    };
-
-    document.addEventListener("click", handleDocumentClick);
-
-    return () => {
-      document.removeEventListener("click", handleDocumentClick);
-    };
-  }, [closeModal]);
+  useClickOutsideHandler(popupRef, () => {
+    closeModal();
+  });
 
   return (
     <div ref={popupRef} className="stripes_window">
