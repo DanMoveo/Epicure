@@ -3,7 +3,7 @@
 @import "../../Services/global-styles.scss";
 
 .rangeSlider {
-@include centerElement;
+  @include centerElement;
   flex-direction: column;
   background-color: #f9f4ea;
   width: 309px;
@@ -15,8 +15,8 @@
 
   .rc-slider-handle {
     margin-top: -10px;
-    background-color: black;
-    border-color: black;
+    background-color: #de9200;
+    border-color: #de9200;
     height: 23px;
     width: 23px;
 

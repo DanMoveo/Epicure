@@ -1,90 +1,78 @@
 // HomePage.tsx
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TableImage from "../../Components/TableImage/TableImage";
 import Carousel from "../../Components/Carousel/Carousel";
 import "./HomePage.scss";
-import * as image from "../../Services/Images";
 import OurIcons from "../../Components/OurIcons/OurIcons";
 import ChefOfTheWeek from "../../Components/ChefOfTheWeek/ChefOfTheWeek";
 import AboutUs from "../../Components/AboutUs/AboutUs";
 import { text } from "../../Services/textConstants";
 import AllRestaurnsButton from "../../Components/AllRestaurnsButton/AllRestaurnsButton";
 import AboutUsDesktop from "../../Components/AboutUsDesktop/AboutUsDesktop";
+import axios from "axios";
 
-const popularRestaurantSlides = [
-  {
-    id: 1,
-    title: "Claro",
-    chefName: "Ran Shamir",
-    dishImage: image.claro,
-    rating: 3,
-  },
-  {
-    id: 2,
-    title: "Lumia",
-    chefName: "Meir Adonie",
-    dishImage: image.claro,
-    rating: 2,
-  },
-  {
-    id: 3,
-    title: "Claro",
-    chefName: "Ran Shamir",
-    dishImage: image.claro,
-    rating: 1,
-  },
-];
+type Restaurant = {
+  image: string;
+  name: string;
+  chefName: string;
+  rate: number;
+};
 
-const signatureDish = [
-  {
-    id: 1,
-    title: "Pad Ki Mao",
-    description:
-      "Shrimps, Glass Noodles, Kemiri Nuts, Shallots, Lemon Grass, Magic Chili Brown Coconut",
-    dishImage: image.claro,
-    price: "88",
-    additionalImage: [image.vegan, image.spicy],
-  },
-  {
-    id: 2,
-    title: "Garbar",
-    description:
-      "Shrimps, Glass Noodles, Kemiri Nuts, Shallots, Lemon Grass, Magic Chili Brown Coconut",
-    dishImage: image.claro,
-    price: "78",
-    additionalImage: [image.vegetarian],
-  },
-  {
-    id: 3,
-    title: "Beach Sunset",
-    description:
-      "Shrimps, Glass Noodles, Kemiri Nuts, Shallots, Lemon Grass, Magic Chili Brown Coconut",
-    dishImage: image.claro,
-    price: "88",
-    additionalImage: [image.spicy],
-  },
-];
-
-const yossiRestaurantSlides = [
-  {
-    id: 1,
-    title: "Onza",
-    dishImage: image.claro,
-  },
-  {
-    id: 2,
-    title: "Kitchen",
-    dishImage: image.claro,
-  },
-  {
-    id: 3,
-    title: "Beach Sunset",
-    dishImage: image.claro,
-  },
-];
+type Dish = {
+  image: string;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  icons: string[];
+};
 
 const HomePage: React.FC = () => {
+  const [popularRestaurantSlides, setPopularRestaurantSlides] = useState<
+    Restaurant[]
+  >([]);
+  const [chefOfTheWeekRestaurants, setChefOfTheWeekRestaurants] = useState<
+    Restaurant[]
+  >([]);
+  const [randomDishes, setRandomDishes] = useState<Dish[]>([]);
+
+  useEffect(() => {
+    fetchMostPopularRestaurants();
+    fetchChefOfTheWeekRestaurants();
+    fetchRandomDishes();
+  }, []);
+
+  async function fetchMostPopularRestaurants() {
+    try {
+      const response = await axios.get<Restaurant[]>(
+        "http://localhost:5000/restaurants/mostPopular"
+      );
+      const data = response.data;
+      setPopularRestaurantSlides(data.slice(0, 3));
+    } catch (error) {}
+  }
+
+  async function fetchChefOfTheWeekRestaurants() {
+    try {
+      const response = await axios.get<Restaurant[]>(
+        `http://localhost:5000/restaurants/chefs/Yossi Shitrit`
+      );
+      const data = response.data.map((restaurant) => ({
+        ...restaurant,
+        chefName: "",
+      }));
+      setChefOfTheWeekRestaurants(data.slice(0, 3));
+    } catch (error) {}
+  }
+
+  async function fetchRandomDishes() {
+    try {
+      const response = await axios.get<Dish[]>("http://localhost:5000/dishes/");
+      const data = response.data;
+      setRandomDishes(data.slice(0, 3));
+    } catch (error) {}
+  }
   return (
     <>
       <TableImage />
@@ -93,18 +81,19 @@ const HomePage: React.FC = () => {
         slides={popularRestaurantSlides}
       />
       <AllRestaurnsButton />
-      <Carousel title={text.signatureDishTitle} slides={signatureDish} />
+      <Carousel title={text.signatureDishTitle} slides={randomDishes} />
       <div className="hiddingFromDesktop">
         <AllRestaurnsButton />
       </div>
       <OurIcons></OurIcons>
-      <ChefOfTheWeek />
+      <ChefOfTheWeek chefOfTheWeekRestaurants={chefOfTheWeekRestaurants} />
       <div className="hiddingFromDesktop">
         <Carousel
           title={text.yossiRestaurantTitle}
-          slides={yossiRestaurantSlides}
+          slides={chefOfTheWeekRestaurants}
         />
       </div>
+
       <AboutUs />
       <AboutUsDesktop />
     </>

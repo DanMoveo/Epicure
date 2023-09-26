@@ -1,8 +1,9 @@
 // ResturantsPage.tsx
 
-import React, { useState, ChangeEvent, useRef } from "react";
+import React, { useState, ChangeEvent, useRef, useEffect } from "react";
 import "./ResturantsPage.scss";
 import * as image from "../../Services/Images";
+
 import { NavLink } from "react-router-dom";
 import Card from "../../Components/Card/Card";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,77 +11,47 @@ import "rc-slider/assets/index.css";
 import RangeSlider from "../../Components/RangeSlider/RangeSlider";
 import Tabs from "../../Components/Tabs/Tabs";
 import { useClickOutsideHandler } from "../../Hooks/useClickOutsideHandler";
+import axios from "axios";
 
-interface Restaurant {
+
+type Restaurant = {
+  id: string;
   image: string;
-  resturantName: string;
+  name: string;
   chefName: string;
-  isNew: boolean;
-  isMostPopular: boolean;
-  isOpenNow: boolean;
   rate: number;
-}
-
+};
 const ResturantsPage: React.FC = () => {
-  const tabs: string[] = ["All", "New", "Most Popular", "Open Now"];
-  const restaurants: Restaurant[] = [
-    {
-      image: image.claro,
-      resturantName: "Claro",
-      chefName: "Ran Shmueli",
-      isNew: false,
-      isMostPopular: false,
-      isOpenNow: true,
-      rate: 2,
-    },
-    {
-      image: image.kab_kem,
-      resturantName: "Kab Kem",
-      chefName: "Yariv Malili",
-      isNew: false,
-      isMostPopular: true,
-      isOpenNow: false,
-      rate: 3,
-    },
-    {
-      image: image.messa,
-      resturantName: "Messa",
-      chefName: "Aviv Moshe",
-      isNew: false,
-      isMostPopular: true,
-      isOpenNow: true,
-      rate: 4,
-    },
-    {
-      image: image.nithan_thai,
-      resturantName: "Nitan Thai",
-      chefName: "Shahaf Shabta",
-      isNew: true,
-      isMostPopular: false,
-      isOpenNow: false,
-      rate: 3,
-    },
-    {
-      image: image.nithan_thai,
-      resturantName: "Nitan Thai",
-      chefName: "Shahaf Shabta",
-      isNew: true,
-      isMostPopular: false,
-      isOpenNow: false,
-      rate: 2,
-    },
-    {
-      image: image.nithan_thai,
-      resturantName: "Nitan Thai",
-      chefName: "Shahaf Shabta",
-      isNew: true,
-      isMostPopular: false,
-      isOpenNow: false,
-      rate: 5,
-    },
-  ];
+  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
 
-  const { type } = useParams<{ type?: string }>(); 
+  useEffect(() => {
+    fetchData(); 
+  }, []);
+
+  async function fetchMostPopularRestaurants() {
+    try {
+      const response = await axios.get<Restaurant[]>(
+        "http://localhost:5000/restaurants/mostPopular"
+      );
+      const data = response.data;
+      setRestaurants(data);
+    } catch (error) {
+    }
+  }
+
+  async function fetchData() {
+    try {
+      const response = await axios.get<Restaurant[]>(
+        "http://localhost:5000/restaurants/"
+      );
+      const data = response.data;
+      setRestaurants(data);
+    } catch (error) {}
+  }
+
+  const tabs: string[] = ["All", "New", "Most Popular", "Open Now"];
+
+  const { type } = useParams<{ type?: string }>();
   const initialActiveTab = type ? tabs.indexOf(type) : 0;
   const [activeTab, setActiveTab] = useState<number>(initialActiveTab);
   const navigate = useNavigate();
@@ -131,6 +102,11 @@ const ResturantsPage: React.FC = () => {
 
   const handleTabClick = (index: number) => {
     setActiveTab(index);
+    if (index === 2) {
+      fetchMostPopularRestaurants();
+    } else {
+      fetchData();
+    }
     navigate(`/restaurants/${formatChefName(tabs[index])}`);
     setMapViewActive(false);
   };
@@ -152,28 +128,11 @@ const ResturantsPage: React.FC = () => {
   };
 
   const filterRestaurants = () => {
-    const activeTabLabel = tabs[activeTab];
     return restaurants.filter((restaurant) => {
-      const isActiveTab = () => {
-        switch (activeTabLabel) {
-          case "All":
-            return true;
-          case "New":
-            return restaurant.isNew;
-          case "Most Popular":
-            return restaurant.isMostPopular;
-          case "Open Now":
-            return restaurant.isOpenNow;
-          default:
-            return false;
-        }
-      };
-
       const hasSelectedRating =
         selectedRatings.length === 0 ||
         selectedRatings.includes(restaurant.rate);
-
-      return isActiveTab() && hasSelectedRating;
+      return hasSelectedRating;
     });
   };
 
@@ -183,6 +142,7 @@ const ResturantsPage: React.FC = () => {
     navigate(`/restaurants/mapView`);
   };
   const filteredRestaurants = filterRestaurants();
+
   return (
     <div className="restaurantsContainer">
       <h2 className="title">RESTAURANTS</h2>
@@ -242,12 +202,16 @@ const ResturantsPage: React.FC = () => {
                 <input
                   type="checkbox"
                   className="checkbox"
-                  onChange={(event) => handleCheckboxChange(event, rowIndex + 1)}
+                  onChange={(event) =>
+                    handleCheckboxChange(event, rowIndex + 1)
+                  }
                 />
                 {Array.from({ length: 5 }).map((_, colIndex) => (
                   <img
                     key={colIndex}
-                    src={colIndex < rowIndex + 1 ? image.starFull : image.starEmpty}
+                    src={
+                      colIndex < rowIndex + 1 ? image.starFull : image.starEmpty
+                    }
                     alt={`Star ${colIndex < rowIndex + 1 ? "Full" : "Empty"}`}
                   />
                 ))}
@@ -264,22 +228,24 @@ const ResturantsPage: React.FC = () => {
         )}
 
         {/* Restaurant List */}
-        <div className="listContainer">
-          {filteredRestaurants.map((restaurant, index) => (
-            <NavLink
-              key={index}
-              to={`/restaurant/${formatChefName(restaurant.resturantName)}/Brakefast`}
-              style={{ textDecoration: "none" }}
-            >
-              <Card
-                image={restaurant.image}
-                restaurantName={restaurant.resturantName}
-                chefName={restaurant.chefName}
-                rating={restaurant.rate}
-              />
-            </NavLink>
-          ))}
-        </div>
+        {!mapViewActive && (
+          <div className="restaurantListContainer">
+            {filteredRestaurants.map((restaurant, index) => (
+              <NavLink
+                key={index}
+                to={`/restaurant/${restaurant.id}/${formatChefName(restaurant.name)}/Brakefast`}
+                style={{ textDecoration: "none" }}
+              >
+                <Card
+                  image={restaurant.image}
+                  restaurantName={restaurant.name}
+                  chefName={restaurant.chefName}
+                  rating={restaurant.rate}
+                />
+              </NavLink>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

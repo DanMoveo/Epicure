@@ -6,44 +6,37 @@ import { text } from "../../Services/textConstants";
 import * as image from "../../Services/Images";
 import Card from "../Card/Card";
 
-const restaurants = [
-  {
-    image: image.nithan_thai,
-    resturantName: "Onza",
-    chefName: "Chef 10",
-  },
-  {
-    image: image.nithan_thai,
-    resturantName: "Kitchen Market",
-    chefName: "Chef 11",
-  },
-  {
-    image: image.nithan_thai,
-    resturantName: "Mashya",
-    chefName: "Chef 12",
-  },
-];
 
-const ChefOfTheWeek: React.FC = () => {
-  return (
+type Restaurant = {
+  image: string;
+  name: string;
+  chefName: string;
+  rate: number;
+};
+
+type ChefOfTheWeekProps = {
+  chefOfTheWeekRestaurants: Restaurant[];
+};
+
+const ChefOfTheWeek: React.FC<ChefOfTheWeekProps> = ({ chefOfTheWeekRestaurants }) => {  return (
     <>
-      <span className="title">CHEF OF THE WEEK:</span>
+      <span className="chefOfTheWeektitle">CHEF OF THE WEEK:</span>
       <div className="chefOfTheWeekContainer">
         <img src={image.yossi} alt="yossi" className="chefOfTheWeekImage"></img>
-        <div className="window">
-          <span className="chefName">{text.chefOfTheWeekName}</span>
+        <div className="chefOfTheWeekwindow">
+          <span className="chefOfTheWeekchefName">{text.chefOfTheWeekName}</span>
         </div>
-        <p className="text">{text.chefOfTheWeekText}</p>
+        <p className="chefOfTheWeektext">{text.chefOfTheWeekText}</p>
       </div>
 
       <div className="chefOfTheWeekRestaurants">
         <span className="chefOfTheWeekName">{text.chefRestaurants}</span>
         <div className="chefRestaurants">
-          {restaurants.map((restaurant, index) => (
+          {chefOfTheWeekRestaurants.map((restaurant, index) => (
             <Card
               key={index}
-              image={restaurants[index].image}
-              restaurantName={restaurants[index].resturantName}
+              image={chefOfTheWeekRestaurants[index].image}
+              restaurantName={chefOfTheWeekRestaurants[index].name}
             />
           ))}
         </div>

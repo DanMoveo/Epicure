@@ -8,8 +8,9 @@
   flex-direction: column;
   padding-right: 0;
   @media (min-width: 768px) {
-    gap: 24px;
     align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
   }
 
   .restaurant-image {
@@ -19,12 +20,18 @@
   }
 
   .textContainer {
-    @include centerElement;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
     display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 20px;
+    margin-top: 10px;
     flex: 1;
+    align-items: flex-start;
+    @media (min-width: 768px) {
+      @include centerElement;
+      margin: 0px;
+      margin-bottom: 30px;
+    }
     .restaurant-name {
       @include centerElement;
       flex: 1;
@@ -36,21 +43,21 @@
       color: black;
       margin-top: 20px;
       @media (min-width: 768px) {
-        margin-top: 0px;
+        padding: 10px;
+        display: block;
+        margin-top: 20px;
         font-size: 40px !important;
         line-height: 47px;
-        text-align: center;
         letter-spacing: 2.67px;
-        padding-left: 50px;
-        padding-right: 50px;
+        padding-left: 20px;
+        padding-right: 20px;
       }
     }
 
     .chefName {
       font-family: $font-family;
       font-weight: 200;
-      font-size: 24px;
-      line-height: 30px;
+      font-size: 16px;
       letter-spacing: 1.97px;
       color: black;
       text-align: center;

@@ -42,14 +42,14 @@ icon {
       position: relative;
       flex-direction: column;
       margin-bottom: 25px;
-      width: 337px;
+      width: 314px;
       @media (min-width: 768px) {
         width: 350px;
       }
 
       .text {
         font-family: $font-family;
-        font-size: 26px;
+        font-size: 24px;
         font-weight: 200;
         line-height: 1.2;
         letter-spacing: 1px;

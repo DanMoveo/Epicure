@@ -5,10 +5,8 @@
   @include centerElement;
   flex-direction: column;
   background-color: #fafafa;
-  @media (min-width: 768px) {
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
+  margin-top: 30px;
+  margin-bottom: 30px;
 
   .title {
     font-family: $font-family;
@@ -16,8 +14,10 @@
     font-size: 18px;
     letter-spacing: 1.25px;
     line-height: 35px;
+    margin: 0px;
     @media (min-width: 768px) {
       font-size: 30px;
+      margin-top: 20px;
     }
   }
 

@@ -5,18 +5,19 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import "./Carousel.scss";
 import Card from "../Card/Card";
+import restaurantImage from "../../Services/restaurants"
 
 interface CarouselProps {
   title: string;
   slides: {
-    id: number;
-    dishImage: string;
-    title: string;
+    id?: number;
+    image: string;
+    name: string;
     chefName?: string;
     description?: string;
-    price?: string;
-    additionalImage?: string[];
-    rating?: number;
+    price?: number;
+    icons?: string[];
+    rate?: number;
   }[];
 }
 
@@ -29,17 +30,17 @@ const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
           {slides.map((slide) => (
             <SwiperSlide key={slide.id}>
               <div className="carousel-slide">
-                <img src={slide.dishImage} alt={slide.title} />
+                <img src={restaurantImage[slide.image]} alt={slide.name} className="carouselImage" />
                 <div className="text">
-                  <h2 className="title">{slide.title}</h2>
+                  <h2 className="title">{slide.name}</h2>
                   <p className="chefName">{slide.chefName}</p>
                   <p className="description">{slide.description}</p>
-                  {slide.additionalImage && (
+                  {slide.icons && (
                     <div className="additional-Images">
-                      {slide.additionalImage.map((imageUrl, index) => (
+                      {slide.icons.map((imageUrl, index) => (
                         <img
                           key={index}
-                          src={imageUrl}
+                          src={restaurantImage[imageUrl]}
                           alt={`Additional ${index + 1}`}
                         />
                       ))}
@@ -58,13 +59,13 @@ const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
         {slides.map((restaurant, index) => (
           <Card
             key={index}
-            image={slides[index].dishImage}
-            restaurantName={slides[index].title}
+            image={slides[index].image}
+            restaurantName={slides[index].name}
             chefName={slides[index].chefName}
             description={slides[index].description}
             price={slides[index].price}
-            additionalImage={slides[index].additionalImage}
-            rating={slides[index].rating}
+            icons={slides[index].icons}
+            rating={slides[index].rate}
           />
         ))}
       </div>

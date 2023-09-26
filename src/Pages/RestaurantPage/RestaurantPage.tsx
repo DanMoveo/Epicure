@@ -1,172 +1,117 @@
-// RestaurantPage.tsx
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as image from "../../Services/Images";
+import restaurantImage from "../../Services/restaurants";
 import Card from "../../Components/Card/Card";
 import "./RestaurantPage.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import Tabs from "../../Components/Tabs/Tabs";
+import axios from "axios";
 
-interface Dish {
+// Define types
+type Restaurant = {
+  id: string;
+  image: string;
+  name: string;
+  chefName: string;
+  rate: number;
+  dishes: Dish[];
+};
+
+type Dish = {
   image: string;
   name: string;
   description: string;
-  price: string;
+  price: number;
   category: string;
-}
-
-interface Restaurant {
-  id: string;
-  chefName: string;
-  image: string;
-  dishes: Dish[];
-}
+  icons: string[];
+};
 
 const RestaurantPage: React.FC = () => {
-  const tabs: string[] = ["Brakefast", "Lunch", "Dinner"];
+  // State
+  const [activeTab, setActiveTab] = useState<number>(0);
+  const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
+  const [dishes, setDishes] = useState<Dish[] | null>(null);
+
+  // Router params
+  const { restaurantId } = useParams<{
+    restaurantId: string;
+    restaurantName: string;
+  }>();
+
+  // Navigation
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<number>(0); 
-  const { restaurantName } = useParams<{ restaurantName: string }>(); 
 
-  const restaurants: Restaurant[] = [
-    {
-      id: "claro",
-      chefName: "Ran Shmueli",
-      image: image.claroBig,
-      dishes: [
-        {
-          image: image.pad_ki_mao,
-          name: "Pad Ki Mao",
-          description: "Green, Papaya, Mango,Chukka",
-          price: "88",
-          category: "Brakefast",
-        },
-        {
-          image: image.ta_ma_la_ko,
-          name: "Ta Ma La Ko",
-          description: "Green, Papaya, Mango,Chukka",
-          price: "88",
-          category: "Brakefast",
-        },
-        {
-          image: image.pad_ki_mao,
-          name: "Pad Ki Mao",
-          description: "Green, Papaya, Mango,Chukka",
-          price: "88",
-          category: "Dinner",
-        },
-        {
-          image: image.ta_ma_la_ko,
-          name: "Ta Ma La Ko",
-          description: "sss",
-          price: "20",
-          category: "Lunch",
-        },
-        {
-          image: image.red_farm,
-          name: "Red Farm",
-          description: "sss",
-          price: "20",
-          category: "Lunch",
-        },
-        {
-          image: image.ta_ma_la_ko,
-          name: "Ta Ma La Ko",
-          description: "Green, Papaya, Mango,Chukka",
-          price: "88",
-          category: "Brakefast",
-        },
-        {
-          image: image.ta_ma_la_ko,
-          name: "Ta Ma La Ko",
-          description: "Green, Papaya, Mango,Chukka",
-          price: "88",
-          category: "Brakefast",
-        },
-        {
-          image: image.ta_ma_la_ko,
-          name: "Ta Ma La Ko",
-          description: "Green, Papaya, Mango,Chukka",
-          price: "88",
-          category: "Brakefast",
-        },
-      ],
-    },
-    {
-      id: "kab-kem",
-      chefName: "Yariv Malili",
-      image: image.claroBig,
-      dishes: [
-        {
-          image: image.pad_ki_mao,
-          name: "Dish 1",
-          description: "xxx",
-          price: "10",
-          category: "Lunch",
-        },
-        {
-          image: image.ta_ma_la_ko,
-          name: "Dish 2",
-          description: "sss",
-          price: "20",
-          category: "Brakefast",
-        },
-      ],
-    },
-  ];
+  // Fetch restaurant data
+  useEffect(() => {
+    fetchData();
+    fetchDishesByCategory("breakfast");
+  }, []);
 
+  async function fetchData() {
+    try {
+      const response = await axios.get<Restaurant>(
+        `http://localhost:5000/restaurants/${restaurantId}`
+      );
+      setRestaurant(response.data);
+    } catch (error) {}
+  }
+
+  // Fetch dishes by category
+  async function fetchDishesByCategory(category: string) {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/dishes/${category.toLowerCase()}/${restaurantId}`
+      );
+      setDishes(response.data);
+    } catch (error) {}
+  }
+
+  // Handle tab click
   const handleTabClick = (index: number) => {
+    const tab = tabs[index];
+    fetchDishesByCategory(tab);
     setActiveTab(index);
-    const selectedRestaurant = restaurants.find(
-      (restaurant) => restaurant.id === restaurantName
-    );
-    if (selectedRestaurant) {
-      const selectedTab = tabs[index];
-      navigate(`/restaurant/${selectedRestaurant.id}/${selectedTab}`);
+    if (restaurant) {
+      navigate(
+        `/restaurant/${restaurant.id}/${restaurant.name.toLowerCase()}/${tab}`
+      );
     }
   };
 
-  const selectedRestaurant = restaurants.find(
-    (restaurant) => restaurant.id === restaurantName
-  );
+  // Define tabs
+  const tabs: string[] = ["Breakfast", "Lunch", "Dinner"];
 
-  if (!selectedRestaurant) {
-    return <div>Dishes not found</div>;
-  }
-
+  // Render
   return (
     <div className="container">
+
       <img
-        src={selectedRestaurant.image}
+        src={restaurant ? restaurantImage[restaurant.image] : ""}
         alt="restaurantImage"
         className="restaurantImage"
       />
       <div className="textContainer">
-        <h2 className="restaurantName">{selectedRestaurant.id}</h2>
-        <h2 className="chefName">{selectedRestaurant.chefName}</h2>
+        <h2 className="restaurantName">{restaurant?.name}</h2>
+        <h2 className="chefName">{restaurant?.chefName}</h2>
         <div className="openContainer">
           <img src={image.clock} alt="clockIcon" className="clockIcon" />
           <h2 className="open">Open now</h2>
         </div>
       </div>
-
-      <Tabs tabs={tabs} activeTab={activeTab} onTabClick={handleTabClick} />
+      <div className="restaurantTab">
+        <Tabs tabs={tabs} activeTab={activeTab} onTabClick={handleTabClick} />
+      </div>
       <div className="listContainer">
-        {selectedRestaurant.dishes.map((dish, index) => {
-          return (
-            <>
-              {tabs[activeTab] === dish.category && (
-                <Card
-                  key={index}
-                  image={dish.image}
-                  restaurantName={dish.name}
-                  description={dish.description}
-                  price={dish.price}
-                />
-              )}
-            </>
-          );
-        })}
+        {dishes &&
+          dishes.map((dish, index) => (
+            <Card
+              key={index}
+              image={dish.image}
+              restaurantName={dish.name}
+              description={dish.description}
+              price={dish.price}
+            />
+          ))}
       </div>
     </div>
   );

@@ -3,14 +3,16 @@
 import React from "react";
 import "./Card.scss";
 import * as imagee from "../../Services/Images";
+import restaurantImage from "../../Services/restaurants"
+
 
 interface CardProps {
   image: string;
   restaurantName: string;
   chefName?: string;
   description?: string;
-  price?: string;
-  additionalImage?: string[];
+  price?: number;
+  icons?: string[];
   rating?: number;
 }
 
@@ -33,19 +35,19 @@ const Card: React.FC<CardProps> = ({
   restaurantName,
   chefName,
   price,
-  additionalImage,
+  icons,
   rating,
   description,
 }) => {
   return (
     <div className="restaurantCard">
-      <img src={image} alt="restaurant" className="restaurant-image" />
+      <img src={restaurantImage[image]} alt="restaurant" className="restaurant-image" />
       <div className="textContainer">
         <span className="restaurant-name">{restaurantName}</span>
-        {additionalImage && (
+        {icons && (
           <div className="additionalImages">
-            {additionalImage.map((imageUrl, index) => (
-              <img key={index} src={imageUrl} alt={`Additional ${index + 1}`} />
+            {icons.map((imageUrl, index) => (
+              <img key={index} src={restaurantImage[imageUrl]} alt={`Additional ${index + 1}`} />
             ))}
           </div>
         )}
