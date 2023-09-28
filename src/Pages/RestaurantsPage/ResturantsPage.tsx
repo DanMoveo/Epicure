@@ -13,19 +13,22 @@ import Tabs from "../../Components/Tabs/Tabs";
 import { useClickOutsideHandler } from "../../Hooks/useClickOutsideHandler";
 import axios from "axios";
 
+type Chef = {
+  id: string;
+  name: string;
+};
 
 type Restaurant = {
   id: string;
   image: string;
   name: string;
-  chefName: string;
+  chefId: Chef;
   rate: number;
 };
 const ResturantsPage: React.FC = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
-
   useEffect(() => {
-    fetchData(); 
+    fetchData();
   }, []);
 
   async function fetchMostPopularRestaurants() {
@@ -35,8 +38,7 @@ const ResturantsPage: React.FC = () => {
       );
       const data = response.data;
       setRestaurants(data);
-    } catch (error) {
-    }
+    } catch (error) {}
   }
 
   async function fetchData() {
@@ -45,6 +47,7 @@ const ResturantsPage: React.FC = () => {
         "http://localhost:5000/restaurants/"
       );
       const data = response.data;
+      console.log(data);
       setRestaurants(data);
     } catch (error) {}
   }
@@ -233,13 +236,15 @@ const ResturantsPage: React.FC = () => {
             {filteredRestaurants.map((restaurant, index) => (
               <NavLink
                 key={index}
-                to={`/restaurant/${restaurant.id}/${formatChefName(restaurant.name)}/Brakefast`}
+                to={`/restaurant/${restaurant.id}/${formatChefName(
+                  restaurant.name
+                )}/Brakefast`}
                 style={{ textDecoration: "none" }}
               >
                 <Card
                   image={restaurant.image}
                   restaurantName={restaurant.name}
-                  chefName={restaurant.chefName}
+                  chefName={restaurant.chefId.name}
                   rating={restaurant.rate}
                 />
               </NavLink>

@@ -13,13 +13,18 @@ interface CarouselProps {
     id?: number;
     image: string;
     name: string;
-    chefName?: string;
+    chefId?: Chef;
     description?: string;
     price?: number;
     icons?: string[];
     rate?: number;
   }[];
 }
+
+type Chef = {
+  id: string;
+  name: string;
+};
 
 const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
   return (
@@ -33,7 +38,7 @@ const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
                 <img src={restaurantImage[slide.image]} alt={slide.name} className="carouselImage" />
                 <div className="text">
                   <h2 className="title">{slide.name}</h2>
-                  <p className="chefName">{slide.chefName}</p>
+                  <p className="chefName">{slide.chefId?.name}</p>
                   <p className="description">{slide.description}</p>
                   {slide.icons && (
                     <div className="additional-Images">
@@ -61,7 +66,7 @@ const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
             key={index}
             image={slides[index].image}
             restaurantName={slides[index].name}
-            chefName={slides[index].chefName}
+            chefName={slides[index].chefId?.name}
             description={slides[index].description}
             price={slides[index].price}
             icons={slides[index].icons}

@@ -4,6 +4,8 @@ import "./Actions.scss";
 import * as Images from "../../../Services/Images";
 import BagWindow from "./BagWindow/BagWindow";
 import SearchWindow from "./SearchWindow/SearchWindow";
+import UserWindow from "./UserWindow/UserWindow";
+import Modal from "../../Modal/Modal";
 
 const Actions: React.FC = () => {
   const [isSearchWindowOpen, setIsSearchWindowOpen] = useState(false);
@@ -48,32 +50,17 @@ const Actions: React.FC = () => {
         className="icon"
         onClick={openUserWindow}
       />
-      {isUserWindowOpen && (
-        <div className="userWindowContainer">
-          <img
-            src={Images.x}
-            alt="x"
-            className="icon"
-            onClick={closeUserWindow}
-          />
-          <div className="userWindowTextContainer">
-            <span className="signInTitle">SIGN IN</span>
-            <span className="continerLabel">
-              To continue the order, please sign in
-            </span>
-            <input type="text" id="textInput" className="detailsInput" placeholder="Email adress" />
-            <input type="text" id="textInput" className="detailsInput" placeholder="Password"/>
-            <button className="loginButton">LOGIN</button>
-            <button className="forgetButton">Forget password?</button>
-            <div className="orContainer">
-              <img src={Images.line} alt="line" className="line" />
-              <span className="orText"> or</span>
-              <img src={Images.line} alt="line" className="line" />
-            </div>
-            <button className="signUpButton">SIGN UP</button>
-          </div>
-        </div>
-      )}
+      <div className="hiddingFromMobile">
+        {isUserWindowOpen && (
+          <Modal>
+            <UserWindow closeWindow={closeUserWindow} />
+          </Modal>
+        )}
+      </div>
+
+      <div className="hiddingFromDesktop">
+        {isUserWindowOpen && <UserWindow closeWindow={closeUserWindow} />}
+      </div>
 
       <img
         src={Images.bag}

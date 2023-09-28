@@ -44,13 +44,13 @@ const RestaurantPage: React.FC = () => {
   // Fetch restaurant data
   useEffect(() => {
     fetchData();
-    fetchDishesByCategory("breakfast");
+    fetchDishesByCategory("Breakfast");
   }, []);
 
   async function fetchData() {
     try {
       const response = await axios.get<Restaurant>(
-        `http://localhost:5000/restaurants/${restaurantId}`
+        `http://localhost:5000/restaurants/restaurant?id=${restaurantId}`
       );
       setRestaurant(response.data);
     } catch (error) {}
@@ -60,10 +60,12 @@ const RestaurantPage: React.FC = () => {
   async function fetchDishesByCategory(category: string) {
     try {
       const response = await axios.get(
-        `http://localhost:5000/dishes/${category.toLowerCase()}/${restaurantId}`
+        `http://localhost:5000/restaurants/restaurant/dishes/?restaurantId=${restaurantId}&category=${category}`
       );
       setDishes(response.data);
-    } catch (error) {}
+    } catch (error) {
+      setDishes([]);
+    }
   }
 
   // Handle tab click
@@ -84,7 +86,6 @@ const RestaurantPage: React.FC = () => {
   // Render
   return (
     <div className="container">
-
       <img
         src={restaurant ? restaurantImage[restaurant.image] : ""}
         alt="restaurantImage"

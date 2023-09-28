@@ -15,7 +15,7 @@
     flex-direction: column;
     margin-left: 25px;
     @media (min-width: 768px) {
-@include centerElement
+      @include centerElement;
     }
     .restaurantName {
       font-family: $font-family;
@@ -60,12 +60,12 @@
     }
   }
 
-  .restaurantTab{
+  .restaurantTab {
     margin-left: 25px;
     @media (min-width: 768px) {
       @include centerElement;
       padding: 20px;
-          }
+    }
   }
   .listContainer {
     display: flex;

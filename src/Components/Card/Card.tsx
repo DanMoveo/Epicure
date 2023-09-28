@@ -3,8 +3,7 @@
 import React from "react";
 import "./Card.scss";
 import * as imagee from "../../Services/Images";
-import restaurantImage from "../../Services/restaurants"
-
+import restaurantImage from "../../Services/restaurants";
 
 interface CardProps {
   image: string;
@@ -41,18 +40,26 @@ const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <div className="restaurantCard">
-      <img src={restaurantImage[image]} alt="restaurant" className="restaurant-image" />
+      <img
+        src={restaurantImage[image]}
+        alt="restaurant"
+        className="restaurant-image"
+      />
       <div className="textContainer">
-        <span className="restaurant-name">{restaurantName}</span>
+        <span className="restaurantNameCard">{restaurantName}</span>
         {icons && (
           <div className="additionalImages">
             {icons.map((imageUrl, index) => (
-              <img key={index} src={restaurantImage[imageUrl]} alt={`Additional ${index + 1}`} />
+              <img
+                key={index}
+                src={restaurantImage[imageUrl]}
+                alt={`Additional ${index + 1}`}
+              />
             ))}
           </div>
         )}
-        <span className="description">{description}</span>
-        <span className="chefName">{chefName}</span>
+        <span className="descriptionCard">{description}</span>
+        <span className="chefNameCard">{chefName}</span>
         {price && (
           <div className="priceContainerMobile">
             <span className="price">₪{price}</span>
@@ -61,7 +68,7 @@ const Card: React.FC<CardProps> = ({
         )}
         {price && (
           <div className="priceContainerDesktop">
-                        <img src={imagee.line} alt="line" className="line" />
+            <img src={imagee.line} alt="line" className="line" />
             <span className="price">₪{price}</span>
             <img src={imagee.line} alt="line" className="line" />
           </div>

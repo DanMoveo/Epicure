@@ -56,7 +56,7 @@ const HomePage: React.FC = () => {
   async function fetchChefOfTheWeekRestaurants() {
     try {
       const response = await axios.get<Restaurant[]>(
-        `http://localhost:5000/restaurants/chefs/Yossi Shitrit`
+        `http://localhost:5000/restaurants/chef?chefName=Yossi Shitrit`
       );
       const data = response.data.map((restaurant) => ({
         ...restaurant,
@@ -73,6 +73,7 @@ const HomePage: React.FC = () => {
       setRandomDishes(data.slice(0, 3));
     } catch (error) {}
   }
+
   return (
     <>
       <TableImage />
