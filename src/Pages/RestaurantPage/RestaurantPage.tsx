@@ -74,6 +74,7 @@ const RestaurantPage: React.FC = () => {
     }
   }
 
+  
   // Handle tab click
   const handleTabClick = (index: number) => {
     const tab = tabs[index];
