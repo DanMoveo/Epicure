@@ -1,5 +1,5 @@
 // Actions.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Actions.scss";
 import * as Images from "../../../Services/Images";
 import BagWindow from "./BagWindow/BagWindow";
@@ -11,9 +11,10 @@ const Actions: React.FC = () => {
   const [isSearchWindowOpen, setIsSearchWindowOpen] = useState(false);
   const [isBagWindowOpen, setIsBagWindowOpen] = useState(false);
   const [isUserWindowOpen, setIsUserWindowOpen] = useState(false);
+  const userWindowRef = useRef<HTMLDivElement | null>(null);
 
   const openSearchWindow = () => {
-    setIsSearchWindowOpen(!isSearchWindowOpen);
+    setIsSearchWindowOpen(true);
   };
 
   const closeSearchWindow = () => {
@@ -21,8 +22,9 @@ const Actions: React.FC = () => {
   };
 
   const openBagWindow = () => {
-    setIsBagWindowOpen(!isBagWindowOpen);
+    setIsBagWindowOpen(true);
   };
+
   const closeBagWindow = () => {
     setIsBagWindowOpen(false);
   };
@@ -34,6 +36,25 @@ const Actions: React.FC = () => {
   const closeUserWindow = () => {
     setIsUserWindowOpen(false);
   };
+
+  useEffect(() => {
+    const handleUserWindowClick = (event: MouseEvent) => {
+      if (
+        userWindowRef.current &&
+        !userWindowRef.current.contains(event.target as Node)
+      ) {
+        closeUserWindow();
+      }
+    };
+
+    if (isUserWindowOpen) {
+      document.addEventListener("mousedown", handleUserWindowClick);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleUserWindowClick);
+    };
+  }, [isUserWindowOpen, isBagWindowOpen]);
 
   return (
     <div className="actions">
@@ -50,7 +71,7 @@ const Actions: React.FC = () => {
         className="icon"
         onClick={openUserWindow}
       />
-      <div className="hiddingFromMobile">
+      <div className="hidingFromMobile">
         {isUserWindowOpen && (
           <Modal>
             <UserWindow closeWindow={closeUserWindow} />
@@ -58,8 +79,12 @@ const Actions: React.FC = () => {
         )}
       </div>
 
-      <div className="hiddingFromDesktop">
-        {isUserWindowOpen && <UserWindow closeWindow={closeUserWindow} />}
+      <div className="hidingFromDesktop">
+        {isUserWindowOpen && (
+          <div ref={userWindowRef}>
+            <UserWindow closeWindow={closeUserWindow} />
+          </div>
+        )}
       </div>
 
       <img

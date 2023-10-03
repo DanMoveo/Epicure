@@ -10,6 +10,17 @@
   height: 56px;
   border-radius: 8px;
 }
+
+.valuesRangeSliderContainer {
+  display: flex;
+  width: 290px;
+  justify-content: space-between;
+  margin-bottom: 15px;
+
+  .orangeColor {
+    color: #de9200;
+  }
+}
 .rc-slider {
   width: 272px;
 
@@ -19,7 +30,6 @@
     border-color: #de9200;
     height: 23px;
     width: 23px;
-
   }
   .rc-slider-track {
     display: flex;

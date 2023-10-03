@@ -20,8 +20,19 @@ const RangeSlider: React.FC<RangeSliderProps> = ({ min, max, onChange }) => {
     }
   };
 
+  const isMinValue = sliderValue[0] === min;
+  const isMaxValue = sliderValue[1] === max;
+
   return (
     <div className="rangeSlider">
+      <div className="valuesRangeSliderContainer">
+        <span className={isMinValue ? "" : "orangeColor"}>
+          {sliderValue[0]}
+        </span>
+        <span className={isMaxValue ? "" : "orangeColor"}>
+          {sliderValue[1]}
+        </span>{" "}
+      </div>
       <Slider
         range
         min={min}
@@ -29,12 +40,8 @@ const RangeSlider: React.FC<RangeSliderProps> = ({ min, max, onChange }) => {
         defaultValue={[min, max]}
         onChange={handleRangeChange}
         handleStyle={[
-          sliderValue[0] === min
-            ? { backgroundColor: "black", borderColor: "black" }
-            : {},
-          sliderValue[1] === max
-            ? { backgroundColor: "black", borderColor: "black" }
-            : {},
+          isMinValue ? { backgroundColor: "black", borderColor: "black" } : {},
+          isMaxValue ? { backgroundColor: "black", borderColor: "black" } : {},
         ]}
       />
     </div>

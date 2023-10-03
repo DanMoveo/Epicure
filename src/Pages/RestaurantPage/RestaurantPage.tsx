@@ -12,7 +12,7 @@ type Restaurant = {
   id: string;
   image: string;
   name: string;
-  chefName: string;
+  chefId: Chef;
   rate: number;
   dishes: Dish[];
 };
@@ -24,6 +24,11 @@ type Dish = {
   price: number;
   category: string;
   icons: string[];
+};
+
+type Chef = {
+  id: string;
+  name: string;
 };
 
 const RestaurantPage: React.FC = () => {
@@ -50,9 +55,10 @@ const RestaurantPage: React.FC = () => {
   async function fetchData() {
     try {
       const response = await axios.get<Restaurant>(
-        `http://localhost:5000/restaurants/restaurant?id=${restaurantId}`
+        `http://localhost:5000/restaurants/restaurant/${restaurantId}`
       );
       setRestaurant(response.data);
+      console.log(response.data);
     } catch (error) {}
   }
 
@@ -60,7 +66,7 @@ const RestaurantPage: React.FC = () => {
   async function fetchDishesByCategory(category: string) {
     try {
       const response = await axios.get(
-        `http://localhost:5000/restaurants/restaurant/dishes/?restaurantId=${restaurantId}&category=${category}`
+        `http://localhost:5000/restaurants/restaurant/${restaurantId}/dishes?category=${category}`
       );
       setDishes(response.data);
     } catch (error) {
@@ -93,7 +99,7 @@ const RestaurantPage: React.FC = () => {
       />
       <div className="textContainer">
         <h2 className="restaurantName">{restaurant?.name}</h2>
-        <h2 className="chefName">{restaurant?.chefName}</h2>
+        <h2 className="chefName">{restaurant?.chefId.name}</h2>
         <div className="openContainer">
           <img src={image.clock} alt="clockIcon" className="clockIcon" />
           <h2 className="open">Open now</h2>

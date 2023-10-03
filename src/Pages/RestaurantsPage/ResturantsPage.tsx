@@ -3,7 +3,6 @@
 import React, { useState, ChangeEvent, useRef, useEffect } from "react";
 import "./ResturantsPage.scss";
 import * as image from "../../Services/Images";
-
 import { NavLink } from "react-router-dom";
 import Card from "../../Components/Card/Card";
 import { useNavigate, useParams } from "react-router-dom";
@@ -184,7 +183,7 @@ const ResturantsPage: React.FC = () => {
           <div className="slideContainer" ref={priceSlideRef}>
             <span className="slideTitle">Price Range Selected</span>
             <span className="slideRange">₪12 - ₪357</span>
-            <RangeSlider min={0} max={100} onChange={handleRangeChange} />
+            <RangeSlider min={12} max={357} onChange={handleRangeChange} />
           </div>
         )}
 

@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import "./Carousel.scss";
 import Card from "../Card/Card";
-import restaurantImage from "../../Services/restaurants"
+import restaurantImage from "../../Services/restaurants";
 
 interface CarouselProps {
   title: string;
@@ -32,10 +32,14 @@ const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
       <p className="label">{title}</p>
       <div className="carousel">
         <Swiper spaceBetween={180} slidesPerView={2}>
-          {slides.map((slide) => (
-            <SwiperSlide key={slide.id}>
+          {slides.map((slide, index) => (
+            <SwiperSlide key={slide.id || index}>
               <div className="carousel-slide">
-                <img src={restaurantImage[slide.image]} alt={slide.name} className="carouselImage" />
+                <img
+                  src={restaurantImage[slide.image]}
+                  alt={slide.name}
+                  className="carouselImage"
+                />
                 <div className="text">
                   <h2 className="title">{slide.name}</h2>
                   <p className="chefName">{slide.chefId?.name}</p>
@@ -63,7 +67,7 @@ const Carousel: React.FC<CarouselProps> = ({ title, slides }) => {
       <div className="cardContainer">
         {slides.map((restaurant, index) => (
           <Card
-            key={index}
+            key={restaurant.id || index}
             image={slides[index].image}
             restaurantName={slides[index].name}
             chefName={slides[index].chefId?.name}
