@@ -32,8 +32,8 @@ icon {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     @media (min-width: 768px) {
       width: 40%;
-      height: 80px;
-      margin-top: -350px;
+      height: 120px;
+      margin-top: -390px;
       margin-bottom: 200px;
     }
 
@@ -49,18 +49,20 @@ icon {
 
       .text {
         font-family: $font-family;
-        font-size: 24px;
         font-weight: 200;
         line-height: 1.2;
         letter-spacing: 1px;
+        @media (min-width: 768px) {
+          font-size: 26px;
+        }
       }
       .input-container {
         @include centerElement;
         border: 1px black solid;
         height: 35px;
+        width: 310px;
         @media (min-width: 768px) {
           width: 380px;
-          margin-left: -30px;
         }
         .search-input {
           background-color: inherit;
@@ -69,9 +71,36 @@ icon {
           text-align: center;
           @media (min-width: 768px) {
             font-size: 16px;
+            width: 300px;
           }
         }
       }
+    }
+    .listOfRestaurants {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+    }
+
+    .restaurantsNames {
+      padding: 10px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+    .customNavLink {
+      text-decoration: none !important;
+      color: black;
     }
   }
 }

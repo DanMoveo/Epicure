@@ -11,6 +11,7 @@ import { text } from "../../Services/textConstants";
 import AllRestaurnsButton from "../../Components/AllRestaurnsButton/AllRestaurnsButton";
 import AboutUsDesktop from "../../Components/AboutUsDesktop/AboutUsDesktop";
 import axios from "axios";
+import useIsMobile from "../../Hooks/useIsMobile";
 
 type Restaurant = {
   image: string;
@@ -36,6 +37,7 @@ const HomePage: React.FC = () => {
     Restaurant[]
   >([]);
   const [randomDishes, setRandomDishes] = useState<Dish[]>([]);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     fetchMostPopularRestaurants();
@@ -46,7 +48,7 @@ const HomePage: React.FC = () => {
   async function fetchMostPopularRestaurants() {
     try {
       const response = await axios.get<Restaurant[]>(
-        "http://localhost:5000/restaurants/mostPopular"
+        `http://localhost:5000/restaurants?sortBy=mostPopular`
       );
       const data = response.data;
       setPopularRestaurantSlides(data.slice(0, 3));
@@ -56,7 +58,7 @@ const HomePage: React.FC = () => {
   async function fetchChefOfTheWeekRestaurants() {
     try {
       const response = await axios.get<Restaurant[]>(
-        `http://localhost:5000/restaurants/chef?chefName=Yossi Shitrit`
+        `http://localhost:5000/restaurants/`
       );
       const data = response.data.map((restaurant) => ({
         ...restaurant,
@@ -77,24 +79,24 @@ const HomePage: React.FC = () => {
   return (
     <>
       <TableImage />
-      <Carousel
-        title={text.popularRestaurantTitle}
-        slides={popularRestaurantSlides}
-      />
-      <AllRestaurnsButton />
-      <Carousel title={text.signatureDishTitle} slides={randomDishes} />
-      <div className="hiddingFromDesktop">
+      <div className="carouselContainer">
+        <Carousel
+          title={text.popularRestaurantTitle}
+          slides={popularRestaurantSlides}
+        />
         <AllRestaurnsButton />
+        <Carousel title={text.signatureDishTitle} slides={randomDishes} />
+        {isMobile && <AllRestaurnsButton />}
       </div>
       <OurIcons></OurIcons>
       <ChefOfTheWeek chefOfTheWeekRestaurants={chefOfTheWeekRestaurants} />
-      <div className="hiddingFromDesktop">
+      {isMobile && (
         <Carousel
           title={text.yossiRestaurantTitle}
           slides={chefOfTheWeekRestaurants}
         />
-      </div>
-
+      )}
+      {isMobile && <AllRestaurnsButton />}
       <AboutUs />
       <AboutUsDesktop />
     </>

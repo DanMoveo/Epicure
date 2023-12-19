@@ -68,7 +68,7 @@ const Actions: React.FC = () => {
       <img
         src={Images.user}
         alt="user"
-        className="icon"
+        className="iconUser"
         onClick={openUserWindow}
       />
       <div className="hidingFromMobile">

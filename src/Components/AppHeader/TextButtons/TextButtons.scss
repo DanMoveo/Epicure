@@ -2,25 +2,22 @@
 @import "../../../Services/variables.scss";
 
 .textButtonsContainer {
-  margin-right: 465px;
-  margin-left: 30px;
+  padding-right: 30%;
+  padding-left: 30px;
 
   .textButton {
     font-family: $font-family;
     font-weight: 200;
-    font-size: 18px;
+    font-size: 20px;
     letter-spacing: 1.92px;
     line-height: 21px;
     @extend .icon;
-    padding: 20px;
     color: black;
     text-decoration: none;
-  }
+    padding: 20px 20px 7px 30px;
 
+  }
   .active {
     border-bottom: $borderBottomOrange;
-  }
-  @media (max-width: 768px) {
-    display: none;
   }
 }

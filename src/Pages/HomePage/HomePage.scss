@@ -1,6 +1,9 @@
-.hiddingFromDesktop{
-    @media (min-width: 768px) {
-display: none;
-      }
-}
 
+.carouselContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @media (min-width: 768px) {
+    align-items: center;
+  }
+}

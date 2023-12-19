@@ -6,8 +6,10 @@
   background-color: #f9f4ea;
   display: flex;
   flex-direction: column;
+  text-align: center;
   padding-right: 0;
   @media (min-width: 768px) {
+    width: 48 0px;
     align-items: center;
     justify-content: center;
     margin-bottom: 30px;
@@ -73,7 +75,9 @@
       letter-spacing: 1.97px;
       margin-bottom: 10px;
       color: black;
-      text-align: center;
+      @media (min-width: 768px) {
+        text-align: center;
+      }
     }
 
     .priceContainerMobile {

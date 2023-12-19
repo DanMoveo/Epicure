@@ -11,6 +11,7 @@ import RangeSlider from "../../Components/RangeSlider/RangeSlider";
 import Tabs from "../../Components/Tabs/Tabs";
 import { useClickOutsideHandler } from "../../Hooks/useClickOutsideHandler";
 import axios from "axios";
+import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
 
 type Chef = {
   id: string;
@@ -26,27 +27,69 @@ type Restaurant = {
 };
 const ResturantsPage: React.FC = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  async function fetchData(page: number) {
+    setIsLoading(true);
+
+    try {
+      const response = await axios.get<Restaurant[]>(
+        `http://localhost:5000/restaurants?page=${page}&pageSize=10`
+      );
+      const data = response.data;
+      setRestaurants((prevRestaurants) => {
+        const uniqueRestaurants = data.filter(
+          (newRestaurant) =>
+            !prevRestaurants.some(
+              (existingRestaurant) => existingRestaurant.id === newRestaurant.id
+            )
+        );
+        return [...prevRestaurants, ...uniqueRestaurants];
+      });
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  const handleScroll = () => {
+    (async () => {
+      const scrollTop =
+        (document.documentElement && document.documentElement.scrollTop) ||
+        document.body.scrollTop;
+
+      const scrollHeight =
+        (document.documentElement && document.documentElement.scrollHeight) ||
+        document.body.scrollHeight;
+
+      const clientHeight =
+        document.documentElement.clientHeight || window.innerHeight;
+
+      if (scrollTop + clientHeight > scrollHeight - 10) {
+        setWorkCounter((prevCounter) => {
+          console.log("calling" + prevCounter);
+          fetchData(prevCounter + 1);
+
+          return prevCounter + 1;
+        });
+      }
+    })();
+  };
+
   useEffect(() => {
-    fetchData();
+    fetchData(1);
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   async function fetchMostPopularRestaurants() {
     try {
       const response = await axios.get<Restaurant[]>(
-        "http://localhost:5000/restaurants/mostPopular"
+        "http://localhost:5000/restaurants?sortBy=mostPopular"
       );
       const data = response.data;
-      setRestaurants(data);
-    } catch (error) {}
-  }
-
-  async function fetchData() {
-    try {
-      const response = await axios.get<Restaurant[]>(
-        "http://localhost:5000/restaurants/"
-      );
-      const data = response.data;
-      console.log(data);
       setRestaurants(data);
     } catch (error) {}
   }
@@ -65,6 +108,7 @@ const ResturantsPage: React.FC = () => {
   const [selectedRange, setSelectedRange] = useState<[number, number]>([
     0, 100,
   ]);
+  const [workCounter, setWorkCounter] = useState<number>(1);
 
   const priceSlideRef = useRef<HTMLDivElement | null>(null);
   useClickOutsideHandler(priceSlideRef, () => {
@@ -103,11 +147,12 @@ const ResturantsPage: React.FC = () => {
   }
 
   const handleTabClick = (index: number) => {
+    console.log(restaurants);
     setActiveTab(index);
     if (index === 2) {
       fetchMostPopularRestaurants();
     } else {
-      fetchData();
+      fetchData(1);
     }
     navigate(`/restaurants/${formatChefName(tabs[index])}`);
     setMapViewActive(false);
@@ -162,65 +207,75 @@ const ResturantsPage: React.FC = () => {
 
         {/* Filters */}
         <div className="filtersContainer">
-          <button className="filter" onClick={priceSlideOpen}>
-            <span className="filterText">Price Range</span>
-            <img src={image.arrowDown} alt="arrow down" />
-          </button>
-          <button className="filter">
-            <span className="filterText" onClick={distanceSlideOpen}>
-              Distance
-            </span>
-            <img src={image.arrowDown} alt="arrow down" />
-          </button>
-          <button className="filter" onClick={rateWindowOpen}>
-            <span className="filterText">Rating</span>
-            <img src={image.arrowDown} alt="arrow down" />
-          </button>
-        </div>
-
-        {/* Price Range Filter */}
-        {priceSlide && (
-          <div className="slideContainer" ref={priceSlideRef}>
-            <span className="slideTitle">Price Range Selected</span>
-            <span className="slideRange">₪12 - ₪357</span>
-            <RangeSlider min={12} max={357} onChange={handleRangeChange} />
+          <div className="filterFather">
+            <button className="filter" onClick={priceSlideOpen}>
+              <span className="filterText">Price Range</span>
+              <img src={image.arrowDown} alt="arrow down" />
+            </button>
+            {/* Price Range Filter */}
+            {priceSlide && (
+              <div className="slideContainer" ref={priceSlideRef}>
+                <span className="slideTitle">Price Range Selected</span>
+                <span className="slideRange">₪12 - ₪357</span>
+                <RangeSlider min={12} max={357} onChange={handleRangeChange} />
+              </div>
+            )}
           </div>
-        )}
 
-        {/* Distance Filter */}
-        {distanceSlide && (
-          <div className="slideContainer distanceSlide" ref={distanceSlideRef}>
-            <span className="slideTitle">Distance</span>
-            <RangeSlider min={0} max={100} onChange={handleRangeChange} />
+          <div className="filterFather">
+            <button className="filter" onClick={distanceSlideOpen}>
+              <span className="filterText">Distance</span>
+              <img src={image.arrowDown} alt="arrow down" />
+            </button>
+            {/* Distance Filter */}
+            {distanceSlide && (
+              <div
+                className="slideContainer distanceSlide"
+                ref={distanceSlideRef}
+              >
+                <span className="slideTitle">Distance</span>
+                <RangeSlider min={0} max={100} onChange={handleRangeChange} />
+              </div>
+            )}
           </div>
-        )}
 
-        {/* Rating Filter */}
-        {rateWindow && (
-          <div className="slideContainer rateWindow" ref={rateWindowRef}>
-            <span className="slideTitle">Rating</span>
-            {Array.from({ length: 5 }).map((_, rowIndex) => (
-              <div key={rowIndex} className="rateWindowRow">
-                <input
-                  type="checkbox"
-                  className="checkbox"
-                  onChange={(event) =>
-                    handleCheckboxChange(event, rowIndex + 1)
-                  }
-                />
-                {Array.from({ length: 5 }).map((_, colIndex) => (
-                  <img
-                    key={colIndex}
-                    src={
-                      colIndex < rowIndex + 1 ? image.starFull : image.starEmpty
-                    }
-                    alt={`Star ${colIndex < rowIndex + 1 ? "Full" : "Empty"}`}
-                  />
+          <div className="filterFather">
+            <button className="filter" onClick={rateWindowOpen}>
+              <span className="filterText">Rating</span>
+              <img src={image.arrowDown} alt="arrow down" />
+            </button>
+            {/* Rating Filter */}
+            {rateWindow && (
+              <div className="slideContainer rateWindow" ref={rateWindowRef}>
+                <span className="slideTitle">Rating</span>
+                {Array.from({ length: 5 }).map((_, rowIndex) => (
+                  <div key={rowIndex} className="rateWindowRow">
+                    <input
+                      type="checkbox"
+                      className="checkbox"
+                      onChange={(event) =>
+                        handleCheckboxChange(event, rowIndex + 1)
+                      }
+                    />
+                    {Array.from({ length: 5 }).map((_, colIndex) => (
+                      <img
+                        key={colIndex}
+                        src={
+                          colIndex < rowIndex + 1
+                            ? image.starFull
+                            : image.starEmpty
+                        }
+                        alt={`Star ${
+                          colIndex < rowIndex + 1 ? "Full" : "Empty"
+                        }`}
+                      />
+                    ))}
+                  </div>
                 ))}
               </div>
-            ))}
+            )}
           </div>
-        )}
+        </div>
 
         {/* Map View */}
         {mapViewActive && (
@@ -250,6 +305,8 @@ const ResturantsPage: React.FC = () => {
             ))}
           </div>
         )}
+
+        {isLoading && <LoadingSpinner />}
       </div>
     </div>
   );

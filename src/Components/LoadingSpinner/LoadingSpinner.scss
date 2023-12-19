@@ -1,0 +1,24 @@
+// LoadingSpinner.scss
+
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 500px; 
+  }
+  
+  .spinner {
+    border: 20px solid rgba(0, 0, 0, 0.1);
+    border-left: 20px solid #3498db; 
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  

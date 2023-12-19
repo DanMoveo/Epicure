@@ -3,15 +3,13 @@
 @import "../../Services/variables.scss";
 
 .restaurantsContainer {
-  padding: 20px;
-
+  padding: 0 $app-layout-x-padding;
   .title {
     font-family: $font-family;
     font-weight: 200;
     font-size: 18px;
     line-height: 28px;
     letter-spacing: 1.92px;
-    margin-left: 0;
 
     @media (min-width: 768px) {
       display: none;
@@ -19,11 +17,16 @@
   }
 
   .tabsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     .tabList {
       list-style-type: none;
       display: flex;
-      padding: 0;
-      margin: 0;
+      padding-left: 10px;
+      margin: 0px;
       font-family: $font-family;
       font-weight: 200;
       font-size: 18px;
@@ -32,6 +35,26 @@
       @media (min-width: 768px) {
         justify-content: center;
         gap: 10px;
+      }
+      @media (max-width: 768px) {
+        width: 100vw;
+      }
+
+      .tabItemDesktop {
+        cursor: pointer;
+        padding: 7px 7px;
+        transition: background-color 0.3s ease;
+        margin-right: 50px;
+
+        &.active {
+          font-weight: 400;
+          @media (min-width: 768px) {
+            border-bottom: 2px solid #fff;
+          }
+        }
+        @media (max-width: 768px) {
+          display: none;
+        }
       }
     }
 
@@ -48,24 +71,7 @@
       }
     }
 
-    .tabItemDesktop {
-      cursor: pointer;
-      padding: 7px 7px;
-      transition: background-color 0.3s ease;
-
-      &.active {
-        font-weight: 400;
-        @media (min-width: 768px) {
-          border-bottom: 2px solid #fff;
-        }
-      }
-      @media (max-width: 768px) {
-        display: none;
-      }
-    }
-
     .filtersContainer {
-      width: 97vw;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -77,69 +83,69 @@
         display: none;
       }
 
-      .filter {
+      .filterFather {
         display: flex;
-        align-items: center;
-        gap: 5px;
-        @extend .icon;
+        flex-direction: row;
 
-        .filterText {
-          font-family: $font-family;
-          font-weight: 200;
-          font-size: 18px;
-          line-height: 21.76px;
-          letter-spacing: 1.92px;
+        .filter {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          @extend .icon;
+
+          .filterText {
+            font-family: $font-family;
+            font-weight: 200;
+            font-size: 18px;
+            line-height: 21.76px;
+            letter-spacing: 1.92px;
+          }
         }
-      }
-    }
+        .slideContainer {
+          margin-top: 40px;
+          position: absolute;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 20px;
+          width: 353px;
+          height: 162px;
+          background-color: white;
+          box-shadow: 2px 4px 10px 0px #00000040;
+          @media (max-width: 768px) {
+            display: none;
+          }
 
-    .slideContainer {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      width: 353px;
-      height: 162px;
-      margin-left: 25%;
-      background-color: white;
-      box-shadow: 2px 4px 10px 0px #00000040;
-      @media (max-width: 768px) {
-        display: none;
-      }
+          .slideTitle {
+            font-family: $font-family;
+            font-weight: 400;
+            font-size: 18px;
+            letter-spacing: 1.92px;
+          }
 
-      .slideTitle {
-        font-family: $font-family;
-        font-weight: 400;
-        font-size: 18px;
-        letter-spacing: 1.92px;
-      }
+          .slideRange {
+            font-family: $font-family;
+            font-weight: 200;
+            font-size: 14px;
+            letter-spacing: 1.97px;
+          }
+        }
+        .rateWindow {
+          margin-top: 40px;
 
-      .slideRange {
-        font-family: $font-family;
-        font-weight: 200;
-        font-size: 14px;
-        letter-spacing: 1.97px;
-      }
-    }
-
-    .distanceSlide {
-      margin-left: 80vh;
-    }
-
-    .rateWindow {
-      width: 353px;
-      height: 368px;
-      margin-left: 105vh;
-      .rateWindowRow {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        .checkbox {
-          width: 18px;
-          height: 18px;
-          margin-right: 25px;
+          width: 353px;
+          height: 368px;
+          .rateWindowRow {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            .checkbox {
+              width: 18px;
+              height: 18px;
+              padding-right: 25px;
+            }
+          }
         }
       }
     }
@@ -149,7 +155,7 @@
       justify-content: center;
       margin-top: 30px;
       margin-bottom: -90px;
-      @media (max-width: 768px) {
+      @media (min-width: 768px) {
         display: none;
       }
     }
@@ -165,10 +171,13 @@
         flex-wrap: wrap;
         justify-content: center;
         margin: 20px;
-        .restaurantCard {
-          text-align: center;
-        }
       }
+    }
+  }
+  .restaurantCard {
+    @media (min-width: 768px) {
+      width: 450px;
+      height: 400px;
     }
   }
 }
