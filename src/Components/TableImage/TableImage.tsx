@@ -60,7 +60,7 @@ const TableImage: React.FC = () => {
         <div className="textContainer">
           <h2 className="text">{text.heroText} </h2>
           <div className="input-container">
-            <img src={Images.search} alt="search" className="icon" />
+            <img src={Images.search} alt="search" className="searchIcon" />
             <input
               type="text"
               name="search-input"

@@ -12,10 +12,14 @@
   font-size: 18px;
   letter-spacing: 1.92px;
   margin-bottom: 20px;
+  @media (min-width: 768px) {
+    font-size: 24px;
+
+  }
 
   .tabItem {
     cursor: pointer;
-    padding: 7px 7px;
+    padding: 7px 18px;
     transition: background-color 0.3s ease;
 
     &.active {

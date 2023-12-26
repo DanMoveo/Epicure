@@ -47,8 +47,10 @@
     }
   }
   .logoContainer {
-    @include centerElement;
-
+    display: flex;
+    align-items: center;
+    width: 40%;
+    justify-content: flex-end;
     .logo {
       width: 178px;
       height: 166px;
