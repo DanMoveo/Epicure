@@ -21,7 +21,7 @@ const OurIcons: React.FC = () => {
             <img src={image.vegetarianBig} alt="vegitarian" className="iconVegitarian" />
             <img src={image.vegetarianBig} alt="vegetarianBig" className="iconVegitarianBig" />
 
-            <h1 className="label">Vegitarian</h1>
+            <h1 className="label">Vegetarian</h1>
           </div>
 
           <div className="ourIcon">

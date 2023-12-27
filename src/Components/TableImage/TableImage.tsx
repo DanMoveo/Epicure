@@ -14,8 +14,18 @@ type Restaurant = {
   rate: number;
 };
 
+type Dish = {
+  image: string;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  icons: string[];
+};
+
 const TableImage: React.FC = () => {
   const [restaurantNames, setRestaurantNames] = useState<Restaurant[]>([]);
+  const [dishNames, setDishNames] = useState<Dish[]>([]);
   const [searchInput, setSearchInput] = useState<string>("");
   const listContainerRef = useRef<HTMLUListElement>(null); // Ref for the list container
 
@@ -28,9 +38,16 @@ const TableImage: React.FC = () => {
       const response = await axios.get<Restaurant[]>(
         "http://localhost:5000/restaurants/"
       );
+      const response2 = await axios.get<Dish[]>(
+        "http://localhost:5000/dishes/"
+      );
       const data = response.data;
       if (data.length > 0) {
         setRestaurantNames(data);
+      }
+      const data1 = response2.data;
+      if (data.length > 0) {
+        setDishNames(data1);
       }
     } catch (error) {}
   }
@@ -53,6 +70,15 @@ const TableImage: React.FC = () => {
     );
   }
 
+  function filterDishes() {
+    if (searchInput.trim() === "") {
+      return [];
+    }
+    return dishNames.filter((dish) =>
+      dish.name.toLowerCase().startsWith(searchInput)
+    );
+  }
+
   return (
     <div className="img-container">
       <img src={Images.table} alt="table" className="hero-img" />
@@ -60,7 +86,7 @@ const TableImage: React.FC = () => {
         <div className="textContainer">
           <h2 className="text">{text.heroText} </h2>
           <div className="input-container">
-            <img src={Images.search} alt="search" className="searchIcon" />
+            <img src={Images.search} alt="search" className="search" />
             <input
               type="text"
               name="search-input"
@@ -72,20 +98,29 @@ const TableImage: React.FC = () => {
             />
           </div>
           {searchInput.trim() !== "" && (
-            <ul ref={listContainerRef} className="listOfRestaurants">
-              {filterRestaurants().map((restaurant, index) => (
-                <li className="restaurantsNames" key={index}>
-                  <NavLink
-                    to={`/restaurant/${restaurant.id}/${encodeURIComponent(
-                      restaurant.name
-                    )}/Brakefast`}
-                    className="customNavLink"
-                  >
-                    {restaurant.name}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
+            <>
+              <ul ref={listContainerRef} className="listOfRestaurants">
+                <span className="titleSearchBox">Restaurns:</span>
+                {filterRestaurants().map((restaurant, index) => (
+                  <li className="restaurantsNames" key={index}>
+                    <NavLink
+                      to={`/restaurant/${restaurant.id}/${encodeURIComponent(
+                        restaurant.name
+                      )}/Brakefast`}
+                      className="customNavLink"
+                    >
+                      {restaurant.name}
+                    </NavLink>
+                  </li>
+                ))}
+                <span className="titleSearchBox">Dishes:</span>
+                {filterDishes().map((dish, index) => (
+                  <li className="restaurantsNames" key={index}>
+                    {dish.name}
+                  </li>
+                ))}
+              </ul>
+            </>
           )}
         </div>
       </div>

@@ -12,29 +12,40 @@ import Tabs from "../../Components/Tabs/Tabs";
 import { useClickOutsideHandler } from "../../Hooks/useClickOutsideHandler";
 import axios from "axios";
 import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
+import { Restaurant } from "../../models/Restaurant.interfaces";
 
-type Chef = {
-  id: string;
-  name: string;
-};
-
-type Restaurant = {
-  id: string;
-  image: string;
-  name: string;
-  chefId: Chef;
-  rate: number;
-};
 const ResturantsPage: React.FC = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const tabs: string[] = ["All", "New", "Most Popular", "Open Now"];
+  const { type } = useParams<{ type?: string }>();
+  const initialActiveTab = type ? tabs.indexOf(type) : 0;
+  const [activeTab, setActiveTab] = useState<number>(initialActiveTab);
+  const navigate = useNavigate();
+  const [mapViewActive, setMapViewActive] = useState(false);
+  const [priceSlide, setPriceSlide] = useState(false);
+  const [distanceSlide, setDistanceSlide] = useState(false);
+  const [rateWindow, setRateWindow] = useState(false);
+  const [selectedRatings, setSelectedRatings] = useState<number[]>([]);
+  const [selectedRange, setSelectedRange] = useState<[number, number]>([
+    0, 100,
+  ]);
+  const [workCounter, setWorkCounter] = useState<number>(1);
+
+  useEffect(() => {
+    !selectedRatings.length && fetchData(1);
+    filterRestaurants();
+    !selectedRatings.length && window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [selectedRatings]);
 
   async function fetchData(page: number) {
     setIsLoading(true);
-
     try {
       const response = await axios.get<Restaurant[]>(
-        `http://localhost:5000/restaurants?page=${page}&pageSize=10`
+        `http://localhost:5000/restaurants?page=${page}&pageSize=9`
       );
       const data = response.data;
       setRestaurants((prevRestaurants) => {
@@ -76,14 +87,6 @@ const ResturantsPage: React.FC = () => {
     })();
   };
 
-  useEffect(() => {
-    fetchData(1);
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   async function fetchMostPopularRestaurants() {
     try {
       const response = await axios.get<Restaurant[]>(
@@ -93,22 +96,6 @@ const ResturantsPage: React.FC = () => {
       setRestaurants(data);
     } catch (error) {}
   }
-
-  const tabs: string[] = ["All", "New", "Most Popular", "Open Now"];
-
-  const { type } = useParams<{ type?: string }>();
-  const initialActiveTab = type ? tabs.indexOf(type) : 0;
-  const [activeTab, setActiveTab] = useState<number>(initialActiveTab);
-  const navigate = useNavigate();
-  const [mapViewActive, setMapViewActive] = useState(false);
-  const [priceSlide, setPriceSlide] = useState(false);
-  const [distanceSlide, setDistanceSlide] = useState(false);
-  const [rateWindow, setRateWindow] = useState(false);
-  const [selectedRatings, setSelectedRatings] = useState<number[]>([]);
-  const [selectedRange, setSelectedRange] = useState<[number, number]>([
-    0, 100,
-  ]);
-  const [workCounter, setWorkCounter] = useState<number>(1);
 
   const priceSlideRef = useRef<HTMLDivElement | null>(null);
   useClickOutsideHandler(priceSlideRef, () => {
@@ -122,6 +109,7 @@ const ResturantsPage: React.FC = () => {
   useClickOutsideHandler(rateWindowRef, () => {
     setRateWindow(false);
   });
+
   const handleRangeChange = (value: number | number[]) => {
     if (Array.isArray(value)) {
       setSelectedRange(selectedRange);
@@ -163,24 +151,35 @@ const ResturantsPage: React.FC = () => {
     rowIndex: number
   ) => {
     if (event.target.checked) {
-      setSelectedRatings((prevSelectedRatings) => [
-        ...prevSelectedRatings,
-        rowIndex,
-      ]);
+      setSelectedRatings((prevSelectedRatings) => {
+        const newSelectedRatings = [...prevSelectedRatings, rowIndex];
+        return newSelectedRatings;
+      });
     } else {
-      setSelectedRatings((prevSelectedRatings) =>
-        prevSelectedRatings.filter((rating) => rating !== rowIndex)
-      );
+      setSelectedRatings((prevSelectedRatings) => {
+        const newSelectedRatings = prevSelectedRatings.filter(
+          (rating) => rating !== rowIndex
+        );
+        return newSelectedRatings;
+      });
     }
   };
 
-  const filterRestaurants = () => {
-    return restaurants.filter((restaurant) => {
-      const hasSelectedRating =
-        selectedRatings.length === 0 ||
-        selectedRatings.includes(restaurant.rate);
-      return hasSelectedRating;
-    });
+  const filterRestaurants = async () => {
+    const filteredRestaurants: Restaurant[] = [];
+    for (let i = 0; i < selectedRatings.length; i++) {
+      const rate = selectedRatings[i];
+      try {
+        const response = await axios.get<Restaurant[]>(
+          `http://localhost:5000/restaurants/rateFilter?rate=${rate}`
+        );
+        const data = response.data;
+        filteredRestaurants.push(...data);
+      } catch (error) {
+        console.error(`Error fetching restaurants with rate ${rate}:`, error);
+      }
+    }
+    setRestaurants(filteredRestaurants);
   };
 
   const handleMapViewClick = () => {
@@ -188,7 +187,6 @@ const ResturantsPage: React.FC = () => {
     setActiveTab(-1);
     navigate(`/restaurants/mapView`);
   };
-  const filteredRestaurants = filterRestaurants();
 
   return (
     <div className="restaurantsContainer">
@@ -243,6 +241,7 @@ const ResturantsPage: React.FC = () => {
             <button className="filter" onClick={rateWindowOpen}>
               <span className="filterText">Rating</span>
               <img src={image.arrowDown} alt="arrow down" />
+              {selectedRatings.length ? `(${selectedRatings.toString()})` : null}
             </button>
             {/* Rating Filter */}
             {rateWindow && (
@@ -256,6 +255,7 @@ const ResturantsPage: React.FC = () => {
                       onChange={(event) =>
                         handleCheckboxChange(event, rowIndex + 1)
                       }
+                      checked={selectedRatings.includes(rowIndex + 1)}
                     />
                     {Array.from({ length: 5 }).map((_, colIndex) => (
                       <img
@@ -287,7 +287,7 @@ const ResturantsPage: React.FC = () => {
         {/* Restaurant List */}
         {!mapViewActive && (
           <div className="restaurantListContainer">
-            {filteredRestaurants.map((restaurant, index) => (
+            {restaurants.map((restaurant: Restaurant, index: number) => (
               <NavLink
                 key={index}
                 to={`/restaurant/${restaurant.id}/${formatChefName(
