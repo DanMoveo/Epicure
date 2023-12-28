@@ -13,8 +13,17 @@ import { useClickOutsideHandler } from "../../Hooks/useClickOutsideHandler";
 import axios from "axios";
 import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
 import { Restaurant } from "../../models/Restaurant.interfaces";
+import { objectToSearchParams } from "../../Services/utils.service";
+
+interface IGetRestaurantsQueryParams {
+  page: number;
+  limit: number;
+  ratings?: number[];
+  sortBy?: string;
+}
 
 const ResturantsPage: React.FC = () => {
+  const limit = 9;
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const tabs: string[] = ["All", "New", "Most Popular", "Open Now"];
@@ -30,38 +39,40 @@ const ResturantsPage: React.FC = () => {
   const [selectedRange, setSelectedRange] = useState<[number, number]>([
     0, 100,
   ]);
-  const [workCounter, setWorkCounter] = useState<number>(1);
+  const initalPageNumber = 1;
+  const [pageNumber, setPageNumber] = useState<number>(initalPageNumber);
+  const [isBottomReached, setIsBottomReached] = useState(false);
+
+  const queryString = selectedRatings
+    .map((rate) => `rates[]=${rate}`)
+    .join("&");
 
   useEffect(() => {
-    !selectedRatings.length && fetchData(1);
-    filterRestaurants();
-    !selectedRatings.length && window.addEventListener("scroll", handleScroll);
+    // On component mount
+    window.addEventListener("scroll", handleScroll);
     return () => {
+      // On component unmount
       window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
+
+  useEffect(() => {
+    // On rating changed
+    setRestaurants([]);
+    if (pageNumber === initalPageNumber) {
+      fetchRestaurantsByFilters(pageNumber);
+      return;
+    }
+    setPageNumber(initalPageNumber);
   }, [selectedRatings]);
 
-  async function fetchData(page: number) {
-    setIsLoading(true);
-    try {
-      const response = await axios.get<Restaurant[]>(
-        `http://localhost:5000/restaurants?page=${page}&pageSize=9`
-      );
-      const data = response.data;
-      setRestaurants((prevRestaurants) => {
-        const uniqueRestaurants = data.filter(
-          (newRestaurant) =>
-            !prevRestaurants.some(
-              (existingRestaurant) => existingRestaurant.id === newRestaurant.id
-            )
-        );
-        return [...prevRestaurants, ...uniqueRestaurants];
-      });
-    } catch (error) {
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  useEffect(() => {
+    if (isBottomReached) setPageNumber(pageNumber + 1);
+  }, [isBottomReached]);
+
+  useEffect(() => {
+    fetchRestaurantsByFilters(pageNumber);
+  }, [pageNumber]);
 
   const handleScroll = () => {
     (async () => {
@@ -76,14 +87,13 @@ const ResturantsPage: React.FC = () => {
       const clientHeight =
         document.documentElement.clientHeight || window.innerHeight;
 
-      if (scrollTop + clientHeight > scrollHeight - 10) {
-        setWorkCounter((prevCounter) => {
-          console.log("calling" + prevCounter);
-          fetchData(prevCounter + 1);
-
-          return prevCounter + 1;
-        });
+      const isViewInTheBottomOfThePage =
+        scrollTop + clientHeight > scrollHeight - 10;
+      if (isViewInTheBottomOfThePage) {
+        setIsBottomReached(true);
+        return;
       }
+      setIsBottomReached(false);
     })();
   };
 
@@ -140,7 +150,9 @@ const ResturantsPage: React.FC = () => {
     if (index === 2) {
       fetchMostPopularRestaurants();
     } else {
-      fetchData(1);
+      console.log("Should not reach here !!!!");
+
+      // fetchAllRestaurants(1);
     }
     navigate(`/restaurants/${formatChefName(tabs[index])}`);
     setMapViewActive(false);
@@ -164,23 +176,27 @@ const ResturantsPage: React.FC = () => {
       });
     }
   };
-
-  const filterRestaurants = async () => {
-    const filteredRestaurants: Restaurant[] = [];
-    for (let i = 0; i < selectedRatings.length; i++) {
-      const rate = selectedRatings[i];
-      try {
-        const response = await axios.get<Restaurant[]>(
-          `http://localhost:5000/restaurants/rateFilter?rate=${rate}`
-        );
-        const data = response.data;
-        filteredRestaurants.push(...data);
-      } catch (error) {
-        console.error(`Error fetching restaurants with rate ${rate}:`, error);
-      }
+  
+  async function fetchRestaurantsByFilters(page: number) {
+    setIsLoading(true);
+    try {
+      const queryParams: IGetRestaurantsQueryParams = {
+        page: pageNumber,
+        limit,
+        ratings: selectedRatings,
+      };
+      const response = await axios.get<Restaurant[]>(
+        `http://localhost:5000/restaurants?${objectToSearchParams(
+          queryParams as Record<string, any>
+        )}`
+      );
+      const newlyFetchedRestaurants = response.data;
+      setRestaurants([...restaurants, ...newlyFetchedRestaurants]);
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
     }
-    setRestaurants(filteredRestaurants);
-  };
+  }
 
   const handleMapViewClick = () => {
     setMapViewActive(true);
@@ -241,7 +257,9 @@ const ResturantsPage: React.FC = () => {
             <button className="filter" onClick={rateWindowOpen}>
               <span className="filterText">Rating</span>
               <img src={image.arrowDown} alt="arrow down" />
-              {selectedRatings.length ? `(${selectedRatings.toString()})` : null}
+              {selectedRatings.length
+                ? `(${selectedRatings.toString()})`
+                : null}
             </button>
             {/* Rating Filter */}
             {rateWindow && (
