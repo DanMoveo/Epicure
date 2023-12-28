@@ -58,6 +58,7 @@ const ResturantsPage: React.FC = () => {
 
   useEffect(() => {
     // On rating changed
+    console.log("1");
     setRestaurants([]);
     if (pageNumber === initalPageNumber) {
       fetchRestaurantsByFilters(pageNumber);
@@ -67,10 +68,12 @@ const ResturantsPage: React.FC = () => {
   }, [selectedRatings]);
 
   useEffect(() => {
+    console.log("2");
     if (isBottomReached) setPageNumber(pageNumber + 1);
   }, [isBottomReached]);
 
   useEffect(() => {
+    console.log("3");
     fetchRestaurantsByFilters(pageNumber);
   }, [pageNumber]);
 
@@ -162,6 +165,7 @@ const ResturantsPage: React.FC = () => {
     event: ChangeEvent<HTMLInputElement>,
     rowIndex: number
   ) => {
+    setRestaurants([]);
     if (event.target.checked) {
       setSelectedRatings((prevSelectedRatings) => {
         const newSelectedRatings = [...prevSelectedRatings, rowIndex];
@@ -176,19 +180,19 @@ const ResturantsPage: React.FC = () => {
       });
     }
   };
-  
+
   async function fetchRestaurantsByFilters(page: number) {
     setIsLoading(true);
     try {
       const queryParams: IGetRestaurantsQueryParams = {
         page: pageNumber,
         limit,
-        ratings: selectedRatings,
       };
+
       const response = await axios.get<Restaurant[]>(
         `http://localhost:5000/restaurants?${objectToSearchParams(
           queryParams as Record<string, any>
-        )}`
+        )}&${queryString}`
       );
       const newlyFetchedRestaurants = response.data;
       setRestaurants([...restaurants, ...newlyFetchedRestaurants]);
